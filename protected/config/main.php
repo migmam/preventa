@@ -8,7 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Aplicación Preventa',
-        'defaultController' => 'Site/login', 
+        //'defaultController' => 'Site/login', 
 
 	// preloading 'log' component
 	'preload'=>array('log'),
