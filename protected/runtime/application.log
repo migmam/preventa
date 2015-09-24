@@ -15,3 +15,37 @@ REQUEST_URI=/preventa/index.php?r=site/index
 in /var/www/html/preventa/protected/views/site/login.php (28)
 in /var/www/html/preventa/protected/controllers/SiteController.php (33)
 in /var/www/html/preventa/index.php (13)
+2015/09/24 15:29:05 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /home/miguel/yii/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /home/miguel/yii/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /home/miguel/yii/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /home/miguel/yii/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /home/miguel/yii/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /home/miguel/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /home/miguel/yii/web/CController.php(291): CFilterChain->run()
+#6 /home/miguel/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /home/miguel/yii/web/CWebApplication.php(282): CController->run('admin')
+#8 /home/miguel/yii/web/CWebApplication.php(141): CWebApplication->runController('preventa/admin')
+#9 /home/miguel/yii/base/CApplication.php(184): CWebApplication->processRequest()
+#10 /var/www/html/preventa/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/preventa/index.php?r=preventa/admin
+HTTP_REFERER=http://localhost/preventa/index.php?r=preventa
+---
+2015/09/24 15:37:01 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /home/miguel/yii/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /home/miguel/yii/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /home/miguel/yii/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /home/miguel/yii/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /home/miguel/yii/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /home/miguel/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /home/miguel/yii/web/CController.php(291): CFilterChain->run()
+#6 /home/miguel/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /home/miguel/yii/web/CWebApplication.php(282): CController->run('admin')
+#8 /home/miguel/yii/web/CWebApplication.php(141): CWebApplication->runController('preventa/admin')
+#9 /home/miguel/yii/base/CApplication.php(184): CWebApplication->processRequest()
+#10 /var/www/html/preventa/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/preventa/index.php?r=preventa/admin
+HTTP_REFERER=http://localhost/preventa/index.php?r=preventa/create
+---

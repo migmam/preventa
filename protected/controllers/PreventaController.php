@@ -39,8 +39,12 @@ class PreventaController extends Controller
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+			array('allow', // allow authenticated user to perform 'admin' action
+				'actions'=>array('admin'),
+				'users'=>array('@'),
+			),
+                        array('allow', // allow admin user to perform 'delete' action
+				'actions'=>array('delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
