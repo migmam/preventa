@@ -1,0 +1,17 @@
+2015/09/24 13:37:35 [error] [php] Undefined variable: model (/var/www/html/preventa/protected/views/site/login.php:28)
+Stack trace:
+#0 /home/miguel/yii/web/CController.php(869): SiteController->renderFile()
+#1 /home/miguel/yii/web/CController.php(782): SiteController->renderPartial()
+#2 /var/www/html/preventa/protected/controllers/SiteController.php(33): SiteController->render()
+#3 /home/miguel/yii/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#4 /home/miguel/yii/web/CController.php(308): CInlineAction->runWithParams()
+#5 /home/miguel/yii/web/CController.php(286): SiteController->runAction()
+#6 /home/miguel/yii/web/CController.php(265): SiteController->runActionWithFilters()
+#7 /home/miguel/yii/web/CWebApplication.php(282): SiteController->run()
+#8 /home/miguel/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /home/miguel/yii/base/CApplication.php(184): CWebApplication->processRequest()
+#10 /var/www/html/preventa/index.php(13): CWebApplication->run()
+REQUEST_URI=/preventa/index.php?r=site/index
+in /var/www/html/preventa/protected/views/site/login.php (28)
+in /var/www/html/preventa/protected/controllers/SiteController.php (33)
+in /var/www/html/preventa/index.php (13)
