@@ -45,6 +45,30 @@
 		<?php echo $form->error($model,'email_cliente'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'id_estado'); ?>
+		<?php echo $form->textField($model,'id_estado',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->error($model,'id_estado'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'observaciones'); ?>
+		<?php echo $form->textArea($model,'observaciones',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($model,'observaciones'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'fecha_agendado'); ?>
+		<?php echo $form->textField($model,'fecha_agendado'); ?>
+		<?php echo $form->error($model,'fecha_agendado'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'fecha_prueba'); ?>
+		<?php echo $form->textField($model,'fecha_prueba'); ?>
+		<?php echo $form->error($model,'fecha_prueba'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

@@ -4,10 +4,11 @@ $this->breadcrumbs=array(
 	'Manage',
 );
 
-$this->menu=array(
-	array('label'=>'List preventa', 'url'=>array('index')),
-	array('label'=>'Create preventa', 'url'=>array('create')),
-);
+//$this->menu=array(
+//	array('label'=>'List preventa', 'url'=>array('index')),
+//	array('label'=>'Create preventa', 'url'=>array('create')),
+//        array('label'=>'Entrar', 'url'=>array('view','id'=>'2')),
+//);
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -23,33 +24,46 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Preventas</h1>
+<h1>Gestionar Preventas</h1>
 
-<p>
+<!--p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+</p-->
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php // echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
-)); ?>
+));
+?>
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'preventa-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+        'selectionChanged'=>'function(id){ location.href = "'.$this->createUrl('view').'/id/"+$.fn.yiiGridView.getSelection(id);}',
 	'columns'=>array(
-		'id_preventa',
+		//'id',
 		'vendedor',
 		'email_vendedor',
 		'telefono_vendedor',
 		'cliente',
 		'telefono_cliente',
+                'email_cliente',
+                array(  'name'=>'id_estado',
+                        'header' =>'Estado',
+                        'value'=>'$data->estado->estado',//valor del campo relacionado...no de id_estado
+                        'filter'=>CHtml::listData(estados::model()->findAll(),'id','estado' ) //modelo estados
+   
+                 ),
 		/*
-		'email_cliente',
+		
+		'id_estado',
+		'observaciones',
+		'fecha_agendado',
+		'fecha_prueba',
 		*/
 		array(
 			'class'=>'CButtonColumn',

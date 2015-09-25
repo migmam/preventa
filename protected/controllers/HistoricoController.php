@@ -74,7 +74,7 @@ class HistoricoController extends Controller
 		{
 			$model->attributes=$_POST['historico'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_historico));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -97,7 +97,7 @@ class HistoricoController extends Controller
 		{
 			$model->attributes=$_POST['historico'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_historico));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(

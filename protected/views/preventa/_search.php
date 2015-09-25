@@ -6,8 +6,8 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'id_preventa'); ?>
-		<?php echo $form->textField($model,'id_preventa',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->label($model,'id'); ?>
+		<?php echo $form->textField($model,'id',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
 	<div class="row">
@@ -38,6 +38,26 @@
 	<div class="row">
 		<?php echo $form->label($model,'email_cliente'); ?>
 		<?php echo $form->textField($model,'email_cliente',array('size'=>45,'maxlength'=>45)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'id_estado'); ?>
+		<?php echo $form->textField($model,'id_estado',array('size'=>10,'maxlength'=>10)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'observaciones'); ?>
+		<?php echo $form->textArea($model,'observaciones',array('rows'=>6, 'cols'=>50)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'fecha_agendado'); ?>
+		<?php echo $form->textField($model,'fecha_agendado'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'fecha_prueba'); ?>
+		<?php echo $form->textField($model,'fecha_prueba'); ?>
 	</div>
 
 	<div class="row buttons">

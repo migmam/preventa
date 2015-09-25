@@ -9,6 +9,10 @@ return array(
 		'cliente' => '',
 		'telefono_cliente' => '',
 		'email_cliente' => '',
+		'id_estado' => '',
+		'observaciones' => '',
+		'fecha_agendado' => '',
+		'fecha_prueba' => '',
 	),
 	'sample2'=>array(
 		'vendedor' => '',
@@ -17,6 +21,10 @@ return array(
 		'cliente' => '',
 		'telefono_cliente' => '',
 		'email_cliente' => '',
+		'id_estado' => '',
+		'observaciones' => '',
+		'fecha_agendado' => '',
+		'fecha_prueba' => '',
 	),
 	*/
 );

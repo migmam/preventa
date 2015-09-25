@@ -4,7 +4,7 @@
  * This is the model class for table "estados".
  *
  * The followings are the available columns in table 'estados':
- * @property string $id_estado
+ * @property string $id
  * @property string $estado
  */
 class estados extends CActiveRecord
@@ -29,7 +29,7 @@ class estados extends CActiveRecord
 			array('estado', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_estado, estado', 'safe', 'on'=>'search'),
+			array('id, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,7 +50,7 @@ class estados extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_estado' => 'Id Estado',
+			'id' => 'Id',
 			'estado' => 'Estado',
 		);
 	}
@@ -73,7 +73,7 @@ class estados extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id_estado',$this->id_estado,true);
+		$criteria->compare('id',$this->id,true);
 
 		$criteria->compare('estado',$this->estado,true);
 

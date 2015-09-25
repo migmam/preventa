@@ -74,7 +74,7 @@ class EstadosController extends Controller
 		{
 			$model->attributes=$_POST['estados'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_estado));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -97,7 +97,7 @@ class EstadosController extends Controller
 		{
 			$model->attributes=$_POST['estados'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_estado));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(

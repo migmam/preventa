@@ -36,16 +36,16 @@ class PreventaController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','cambia_estado'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow authenticated user to perform 'admin' action
-				'actions'=>array('admin'),
-				'users'=>array('@'),
-			),
-                        array('allow', // allow admin user to perform 'delete' action
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('delete'),
 				'users'=>array('admin'),
+			),
+                        array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin'),
+				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -78,7 +78,7 @@ class PreventaController extends Controller
 		{
 			$model->attributes=$_POST['preventa'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_preventa));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -101,7 +101,7 @@ class PreventaController extends Controller
 		{
 			$model->attributes=$_POST['preventa'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_preventa));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(
@@ -151,6 +151,17 @@ class PreventaController extends Controller
 
 		$this->render('admin',array(
 			'model'=>$model,
+		));
+	}
+        
+        /**
+	 * Manages all models.
+	 */
+	public function actionCambia_estado()
+	{
+		$dataProvider=new CActiveDataProvider('preventa');
+		$this->render('cambia_estado',array(
+			'dataProvider'=>$dataProvider,
 		));
 	}
 

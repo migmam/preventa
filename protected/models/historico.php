@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'historico':
  * @property integer $id_preventa
- * @property integer $id_historico
+ * @property integer $id
  * @property string $fecha
  * @property integer $id_estado
  * @property string $observaciones
@@ -30,11 +30,11 @@ class historico extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_preventa, id_historico, fecha, id_estado, observaciones, fecha_agendado, fecha_prueba', 'required'),
-			array('id_preventa, id_historico, id_estado', 'numerical', 'integerOnly'=>true),
+			array('id_preventa, id, fecha, id_estado, observaciones, fecha_agendado, fecha_prueba', 'required'),
+			array('id_preventa, id, id_estado', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_preventa, id_historico, fecha, id_estado, observaciones, fecha_agendado, fecha_prueba', 'safe', 'on'=>'search'),
+			array('id_preventa, id, fecha, id_estado, observaciones, fecha_agendado, fecha_prueba', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,7 +56,7 @@ class historico extends CActiveRecord
 	{
 		return array(
 			'id_preventa' => 'Id Preventa',
-			'id_historico' => 'Id Historico',
+			'id' => 'Id',
 			'fecha' => 'Fecha',
 			'id_estado' => 'Id Estado',
 			'observaciones' => 'Observaciones',
@@ -85,7 +85,7 @@ class historico extends CActiveRecord
 
 		$criteria->compare('id_preventa',$this->id_preventa);
 
-		$criteria->compare('id_historico',$this->id_historico);
+		$criteria->compare('id',$this->id);
 
 		$criteria->compare('fecha',$this->fecha,true);
 

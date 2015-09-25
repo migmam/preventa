@@ -4,7 +4,7 @@ return array(
 	/*
 	'sample1'=>array(
 		'id_preventa' => '',
-		'id_historico' => '',
+		'id' => '',
 		'fecha' => '',
 		'id_estado' => '',
 		'observaciones' => '',
@@ -13,7 +13,7 @@ return array(
 	),
 	'sample2'=>array(
 		'id_preventa' => '',
-		'id_historico' => '',
+		'id' => '',
 		'fecha' => '',
 		'id_estado' => '',
 		'observaciones' => '',
