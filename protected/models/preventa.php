@@ -34,7 +34,7 @@ class preventa extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('vendedor, email_vendedor, telefono_vendedor, cliente, telefono_cliente, email_cliente, id_estado, observaciones, fecha_agendado, fecha_prueba', 'required'),
+			array('vendedor, email_vendedor, telefono_vendedor, cliente, telefono_cliente, email_cliente, id_estado, observaciones, fecha_agendado, fecha_prueba, fecha', 'required'),
 			array('vendedor, cliente', 'length', 'max'=>60),
 			array('email_vendedor, email_cliente', 'length', 'max'=>45),
 			array('telefono_vendedor, telefono_cliente', 'length', 'max'=>20),
@@ -72,10 +72,11 @@ class preventa extends CActiveRecord
 			'cliente' => 'Cliente',
 			'telefono_cliente' => 'Telefono Cliente',
 			'email_cliente' => 'Email Cliente',
-			'id_estado' => 'Id Estado',
+			'id_estado' => 'Estado',
 			'observaciones' => 'Observaciones',
 			'fecha_agendado' => 'Fecha Agendado',
 			'fecha_prueba' => 'Fecha Prueba',
+                        'fecha' => 'Fecha estado',
 		);
 	}
 
@@ -118,6 +119,8 @@ class preventa extends CActiveRecord
 		$criteria->compare('fecha_agendado',$this->fecha_agendado,true);
 
 		$criteria->compare('fecha_prueba',$this->fecha_prueba,true);
+                
+                $criteria->compare('fecha',$this->fecha,true);
 
 		return new CActiveDataProvider('preventa', array(
 			'criteria'=>$criteria,

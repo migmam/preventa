@@ -36,7 +36,7 @@ class PreventaController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','cambia_estado'),
+				'actions'=>array('create','update','preventahistorico'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -144,6 +144,7 @@ class PreventaController extends Controller
 	 */
 	public function actionAdmin()
 	{
+                $this->layout='//layouts/column3';
 		$model=new preventa('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['preventa']))
@@ -163,6 +164,25 @@ class PreventaController extends Controller
 		$this->render('cambia_estado',array(
 			'dataProvider'=>$dataProvider,
 		));
+	}
+        
+          /**
+	 * Manages all models.
+	 */
+	public function actionPreventahistorico()
+	{
+            ;
+			
+		$dataProvider=new CActiveDataProvider('historico', array(
+                    'criteria'=>array(
+                        'condition'=>'id_preventa='.filter_input(INPUT_GET,'id', FILTER_SANITIZE_SPECIAL_CHARS)
+                    )
+                ));
+                
+		$this->render('preventahistorico',array(
+			'dataProvider'=>$dataProvider,
+		));
+	
 	}
 
 	/**

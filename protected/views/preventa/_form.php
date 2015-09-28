@@ -1,6 +1,15 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php 
+    //$estados = $model->estados;
+    $estados = estados::model()->findAll();
+    $mi_lectura = "true";
+    $mi_style ="background-color: #D8D8D8;";
+   
+    //print_r($estados); exit;
+   
+    
+    $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'preventa-form',
 	'enableAjaxValidation'=>false,
 )); ?>
@@ -11,45 +20,52 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'vendedor'); ?>
-		<?php echo $form->textField($model,'vendedor',array('size'=>60,'maxlength'=>60)); ?>
+ 		<?php echo $form->textField($model,'vendedor',array('size'=>60,'maxlength'=>60,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'vendedor'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'email_vendedor'); ?>
-		<?php echo $form->textField($model,'email_vendedor',array('size'=>45,'maxlength'=>45)); ?>
+ 		<?php echo $form->textField($model,'email_vendedor',array('size'=>45,'maxlength'=>45,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'email_vendedor'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'telefono_vendedor'); ?>
-		<?php echo $form->textField($model,'telefono_vendedor',array('size'=>20,'maxlength'=>20)); ?>
+            
+		<?php echo $form->textField($model,'telefono_vendedor',array('size'=>20,'maxlength'=>20,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'telefono_vendedor'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'cliente'); ?>
-		<?php echo $form->textField($model,'cliente',array('size'=>60,'maxlength'=>60)); ?>
+		<?php echo $form->textField($model,'cliente',array('size'=>60,'maxlength'=>60,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'cliente'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'telefono_cliente'); ?>
-		<?php echo $form->textField($model,'telefono_cliente',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($model,'telefono_cliente',array('size'=>20,'maxlength'=>20,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'telefono_cliente'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'email_cliente'); ?>
-		<?php echo $form->textField($model,'email_cliente',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'email_cliente',array('size'=>45,'maxlength'=>45,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'email_cliente'); ?>
 	</div>
+        
+         <div class="row">
+            <?php echo $form->labelEx($model, 'id_estado'); ?>
+            <?php echo $form->dropDownList($model,'id_estado', CHtml::listData(estados::model()->findAll(),'id','estado')) ?>
+            <?php echo $form->error($model, 'id_estado'); ?>
+        </div>
 
-	<div class="row">
+	<!--div class="row">
 		<?php echo $form->labelEx($model,'id_estado'); ?>
 		<?php echo $form->textField($model,'id_estado',array('size'=>10,'maxlength'=>10)); ?>
 		<?php echo $form->error($model,'id_estado'); ?>
-	</div>
+	</div-->
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'observaciones'); ?>
@@ -59,13 +75,13 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fecha_agendado'); ?>
-		<?php echo $form->textField($model,'fecha_agendado'); ?>
+		<?php echo $form->textField($model,'fecha_agendado',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'fecha_agendado'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fecha_prueba'); ?>
-		<?php echo $form->textField($model,'fecha_prueba'); ?>
+		<?php echo $form->textField($model,'fecha_prueba',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'fecha_prueba'); ?>
 	</div>
 

@@ -31,11 +31,19 @@ You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&g
 or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p-->
 
-<?php // echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo"ID: ".Yii::app()->user->getId(); // echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); 
+
+if(Yii::app()->user->getId()=="axtel")
+    $mi_controller = "view";
+else
+    $mi_controller =  "update";
+?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
 ));
+
+
 ?>
 </div><!-- search-form -->
 
@@ -43,7 +51,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'id'=>'preventa-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
-        'selectionChanged'=>'function(id){ location.href = "'.$this->createUrl('view').'/id/"+$.fn.yiiGridView.getSelection(id);}',
+        'selectionChanged'=>'function(id){ location.href = "'.$this->createUrl($mi_controller).'/id/"+$.fn.yiiGridView.getSelection(id);}',
 	'columns'=>array(
 		//'id',
 		'vendedor',
@@ -65,6 +73,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'fecha_agendado',
 		'fecha_prueba',
 		*/
+                'fecha',
 		array(
 			'class'=>'CButtonColumn',
 		),
