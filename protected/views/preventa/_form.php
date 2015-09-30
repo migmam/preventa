@@ -60,6 +60,12 @@
             <?php echo $form->dropDownList($model,'id_estado', CHtml::listData(estados::model()->findAll(),'id','estado')) ?>
             <?php echo $form->error($model, 'id_estado'); ?>
         </div>
+        
+        <div class="row">
+		<?php echo $form->labelEx($model,'fecha'); ?>
+		<?php echo $form->textField($model,'fecha',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+                <?php echo $form->error($model,'fecha'); ?>
+	</div>
 
 	<!--div class="row">
 		<?php echo $form->labelEx($model,'id_estado'); ?>
@@ -75,18 +81,35 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fecha_agendado'); ?>
-		<?php echo $form->textField($model,'fecha_agendado',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+		<?php //echo $form->textField($model,'fecha_agendado',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+                <?php     
+                    $this->widget('ext.YiiDateTimePicker.jqueryDateTime', array(
+                    'model' => $model,
+                    'attribute' => 'fecha_agendado',
+                    'options' => array(), //DateTimePicker options
+                    'htmlOptions' => array(),
+                    ));
+                ?>
 		<?php echo $form->error($model,'fecha_agendado'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fecha_prueba'); ?>
-		<?php echo $form->textField($model,'fecha_prueba',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
-		<?php echo $form->error($model,'fecha_prueba'); ?>
-	</div>
+		<?php //echo $form->textField($model,'fecha_prueba',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+		<?php     
+                    $this->widget('ext.YiiDateTimePicker.jqueryDateTime', array(
+                    'model' => $model,
+                    'attribute' => 'fecha_prueba',
+                    'options' => array(), //DateTimePicker options
+                    'htmlOptions' => array(),
+                    ));
+                ?>
+                <?php echo $form->error($model,'fecha_prueba'); ?>
+            </div>
+    
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Grabar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

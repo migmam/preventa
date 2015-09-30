@@ -4,8 +4,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create preventa', 'url'=>array('create')),
-	array('label'=>'Manage preventa', 'url'=>array('admin')),
+	//array('label'=>'Create preventa', 'url'=>array('create')),
+	array('label'=>'Listado preentas', 'url'=>array('admin')),
 );
 ?>
 

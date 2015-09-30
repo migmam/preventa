@@ -101,7 +101,37 @@ class PreventaController extends Controller
 		{
 			$model->attributes=$_POST['preventa'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                        {
+                                //una aproximación
+                                $connection = Yii::app()->db;
+                                // an SQL with two placeholders ":username" and ":email"
+                                $sql="INSERT INTO tbl_user (username, email) VALUES(:username,:email)";
+                                $command=$connection->createCommand($sql);
+                                // replace the placeholder ":username" with the actual username value
+                                $command->bindParam(":username",$username,PDO::PARAM_STR);
+                                // replace the placeholder ":email" with the actual email value
+                                $command->bindParam(":email",$email,PDO::PARAM_STR);
+                                $command->execute();
+                                // insert another row with a new set of parameters
+                                $command->bindParam(":username",$username2,PDO::PARAM_STR);
+                                $command->bindParam(":email",$email2,PDO::PARAM_STR);
+                                $command->execute();
+                                //Otra aproximacion
+                                $sql = "insert into table (some_field) values (:some_value)";
+                                $parameters = array(":some_value"=>$some_value);
+                                Yii::app()->db->createCommand($sql)->execute($parameters);
+                                //-----------
+                                $model = new Userinfo;
+                                $model->name = $_GET['name'];
+                                $model->number = $_GET['number'];
+                                $model->email = $_GET['email'];
+                                if ($model->validate()){
+                                    $model->save();
+                                } else {
+                                    print_r($model->errors);
+                                }
+				$this->redirect(array('admin','id'=>$model->id));
+                        }
 		}
 
 		$this->render('update',array(
@@ -175,7 +205,11 @@ class PreventaController extends Controller
 			
 		$dataProvider=new CActiveDataProvider('historico', array(
                     'criteria'=>array(
-                        'condition'=>'id_preventa='.filter_input(INPUT_GET,'id', FILTER_SANITIZE_SPECIAL_CHARS)
+                       // 'select'=>array('t.id','t.id_estado','t.observaciones','o'),
+                        'condition'=>'id_preventa='.filter_input(INPUT_GET,'id', FILTER_SANITIZE_SPECIAL_CHARS),
+                        //'join' => 'LEFT JOIN estados ON estados.id = t.id_estado'
+                        'with'=>array('relestados'),
+                        
                     )
                 ));
                 
