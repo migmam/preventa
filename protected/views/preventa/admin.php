@@ -31,9 +31,9 @@ You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&g
 or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p-->
 
-<?php echo"ID: ".Yii::app()->user->getId(); // echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); 
+<?php //echo"ID: ".Yii::app()->user->getId(); // echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); 
 
-if(Yii::app()->user->getId()=="axtel")
+if(Yii::app()->user->role=="axtel")
     $mi_controller = "view";
 else
     $mi_controller =  "update";

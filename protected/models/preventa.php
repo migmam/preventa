@@ -77,6 +77,7 @@ class preventa extends CActiveRecord
 			'fecha_agendado' => 'Fecha Agendado',
 			'fecha_prueba' => 'Fecha Prueba',
                         'fecha' => 'Fecha estado',
+                        'email_enviado'=>'Email enviado'
 		);
 	}
 

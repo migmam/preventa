@@ -96,11 +96,14 @@ class PreventaController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+                $email_enviado = $model->email_enviado;
 
 		if(isset($_POST['preventa']))
 		{
 			$model->attributes=$_POST['preventa'];
                         $model->fecha=null;
+                        $model->email_enviado = 1;
+                        
 			if($model->save())
                         {
                             /*
@@ -146,10 +149,12 @@ class PreventaController extends Controller
                                 //echo $_POST['preventa']['id_estado'].'=='.Yii::app()->params['estado_para_informar'];exit;
                                 if($_POST['preventa']['id_estado'] == Yii::app()->params['estado_para_informar'])
                                 {
-                                    $cuerpo = Yii::app()->params['email_template'];
-                                    $cuerpo = str_replace('#preventa#',$_POST['preventa']['cliente'],$cuerpo);
-                                    //echo $cuerpo;exit;
-                                    Controller::mailsend("mamartinez@somosvirtualcare.com","notreply@virtualcarecorp.com","Preventa app",$cuerpo);
+                                    if($email_enviado != 1)
+                                    {
+                                        $cuerpo = Yii::app()->params['email_template'];
+                                        $cuerpo = str_replace('#preventa#',$_POST['preventa']['cliente'],$cuerpo);
+                                        Controller::mailsend("mamartinez@somosvirtualcare.com","notreply@virtualcarecorp.com","Preventa app",$cuerpo);
+                                    }
                                     
                                 }
 				$this->redirect(array('update','id'=>$model->id));
