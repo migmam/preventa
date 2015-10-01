@@ -14,7 +14,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos con  <span class="required">*</span> son obligatorios.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -91,6 +91,7 @@
                     ));
                 ?>
 		<?php echo $form->error($model,'fecha_agendado'); ?>
+                <?php echo CHtml::button("Reset",array("onclick"=>"resetea('preventa_fecha_agendado')"));?>
 	</div>
 
 	<div class="row">
@@ -105,6 +106,7 @@
                     ));
                 ?>
                 <?php echo $form->error($model,'fecha_prueba'); ?>
+             <?php echo CHtml::button("Reset",array("onclick"=>"resetea('preventa_fecha_prueba')"));?>
             </div>
     
 

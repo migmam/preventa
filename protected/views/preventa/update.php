@@ -1,3 +1,11 @@
+<script type='text/javascript'>
+    function resetea(dato)
+    {
+        elemento =document.getElementById(dato);
+        elemento.value = '0000-00-00 00:00:00';
+    }
+</script>
+
 <?php
 $this->breadcrumbs=array(
 	'Preventas'=>array('index'),
@@ -14,6 +22,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update preventa <?php echo $model->id; ?></h1>
+<h1>Ficha preventa</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

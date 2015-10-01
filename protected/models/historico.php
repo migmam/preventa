@@ -30,7 +30,7 @@ class historico extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_preventa, id, fecha, id_estado, observaciones, fecha_agendado, fecha_prueba', 'required'),
+			array('id_preventa, id_estado', 'required'),
 			array('id_preventa, id, id_estado', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -63,6 +63,7 @@ class historico extends CActiveRecord
 			'observaciones' => 'Observaciones',
 			'fecha_agendado' => 'Fecha Agendado',
 			'fecha_prueba' => 'Fecha Prueba',
+                    
 		);
 	}
 

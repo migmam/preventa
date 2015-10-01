@@ -100,8 +100,10 @@ class PreventaController extends Controller
 		if(isset($_POST['preventa']))
 		{
 			$model->attributes=$_POST['preventa'];
+                        $model->fecha=null;
 			if($model->save())
                         {
+                            /*
                                 //una aproximación
                                 $connection = Yii::app()->db;
                                 // an SQL with two placeholders ":username" and ":email"
@@ -121,16 +123,36 @@ class PreventaController extends Controller
                                 $parameters = array(":some_value"=>$some_value);
                                 Yii::app()->db->createCommand($sql)->execute($parameters);
                                 //-----------
-                                $model = new Userinfo;
-                                $model->name = $_GET['name'];
-                                $model->number = $_GET['number'];
-                                $model->email = $_GET['email'];
-                                if ($model->validate()){
-                                    $model->save();
+                             * *
+                             */
+                                
+                                $model_historico = new historico();
+                                $model_historico->setIsNewRecord(true);
+                                $model_historico->id_preventa = $_GET['id'];
+                                $model_historico->id = null;
+                                $model_historico->fecha_agendado = $_POST['preventa']['fecha_agendado'];
+                                $model_historico->fecha_prueba   = $_POST['preventa']['fecha_prueba'];
+                                $model_historico->observaciones  = $_POST['preventa']['observaciones'];
+                                $model_historico->id_estado      = $_POST['preventa']['id_estado'];
+                                //$model_historico->fecha = 0;
+                                //$model->email = $_GET['email'];
+                                if ($model_historico->validate()){
+                                    $model_historico->save();
                                 } else {
-                                    print_r($model->errors);
+                                    print_r($model_historico->errors);
+                                    exit;
                                 }
-				$this->redirect(array('admin','id'=>$model->id));
+                               // print_r(Yii::app()->params['_d:CMap:private']);
+                                //echo $_POST['preventa']['id_estado'].'=='.Yii::app()->params['estado_para_informar'];exit;
+                                if($_POST['preventa']['id_estado'] == Yii::app()->params['estado_para_informar'])
+                                {
+                                    $cuerpo = Yii::app()->params['email_template'];
+                                    $cuerpo = str_replace('#preventa#',$_POST['preventa']['cliente'],$cuerpo);
+                                    //echo $cuerpo;exit;
+                                    Controller::mailsend("mamartinez@somosvirtualcare.com","notreply@virtualcarecorp.com","Preventa app",$cuerpo);
+                                    
+                                }
+				$this->redirect(array('update','id'=>$model->id));
                         }
 		}
 
@@ -204,11 +226,15 @@ class PreventaController extends Controller
             ;
 			
 		$dataProvider=new CActiveDataProvider('historico', array(
+                    'sort'=>array(
+                             'defaultOrder'=>'fecha DESC',
+                        ),
                     'criteria'=>array(
                        // 'select'=>array('t.id','t.id_estado','t.observaciones','o'),
                         'condition'=>'id_preventa='.filter_input(INPUT_GET,'id', FILTER_SANITIZE_SPECIAL_CHARS),
                         //'join' => 'LEFT JOIN estados ON estados.id = t.id_estado'
                         'with'=>array('relestados'),
+                        
                         
                     )
                 ));

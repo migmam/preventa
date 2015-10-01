@@ -73,7 +73,7 @@ else
 		'fecha_agendado',
 		'fecha_prueba',
 		*/
-                'fecha',
+               // 'fecha',
 		array(
 			'class'=>'CButtonColumn',
 		),

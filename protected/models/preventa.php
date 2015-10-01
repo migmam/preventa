@@ -34,7 +34,7 @@ class preventa extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('vendedor, email_vendedor, telefono_vendedor, cliente, telefono_cliente, email_cliente, id_estado, observaciones, fecha_agendado, fecha_prueba, fecha', 'required'),
+			array('vendedor, email_vendedor, telefono_vendedor, cliente, telefono_cliente, email_cliente, id_estado', 'required'),
 			array('vendedor, cliente', 'length', 'max'=>60),
 			array('email_vendedor, email_cliente', 'length', 'max'=>45),
 			array('telefono_vendedor, telefono_cliente', 'length', 'max'=>20),
