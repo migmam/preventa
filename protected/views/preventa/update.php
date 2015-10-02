@@ -8,8 +8,8 @@
 
 <?php
 $this->breadcrumbs=array(
-	'Preventas'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
+	'Preventas'=>array('admin'),
+	//$model->id=>array('view','id'=>$model->id),
 	'Update',
 );
 

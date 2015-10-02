@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Preventas'=>array('index'),
+	'Preventas'=>array('admin'),
 	$model->id,
 );
 
@@ -9,7 +9,7 @@ $this->menu=array(
 	//array('label'=>'Create preventa', 'url'=>array('create')),
 	//array('label'=>'Update preventa', 'url'=>array('update', 'id'=>$model->id)),
 	//array('label'=>'Delete preventa', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>Yii::t('zii','Are you sure you want to delete this item?'))),
-	//array('label'=>'Listado Preventas', 'url'=>array('admin')),
+	array('label'=>'Listado Preventas', 'url'=>array('admin')),
         //array('label'=>'Cambiar estado', 'url'=>array('cambia_estado')),
         //array('label'=>'Agendar contacto', 'url'=>array('admin')),
         //array('label'=>'Agendar prueba', 'url'=>array('admin')),

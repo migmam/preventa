@@ -39,6 +39,8 @@ class preventa extends CActiveRecord
 			array('email_vendedor, email_cliente', 'length', 'max'=>45),
 			array('telefono_vendedor, telefono_cliente', 'length', 'max'=>20),
 			array('id_estado', 'length', 'max'=>10),
+                        array('observaciones', 'filter','filter' => array('CHtml', 'encode')),
+                        array('fecha_agendado,fecha_prueba,fecha', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, vendedor, email_vendedor, telefono_vendedor, cliente, telefono_cliente, email_cliente, id_estado, observaciones, fecha_agendado, fecha_prueba', 'safe', 'on'=>'search'),

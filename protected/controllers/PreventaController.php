@@ -100,34 +100,23 @@ class PreventaController extends Controller
 
 		if(isset($_POST['preventa']))
 		{
+                        print_r($_POST['preventa']);//exit;
+                        echo "</br>";
+                        print_r($model->attributes);//exit;
+                        $datos_enviados = $_POST['preventa'];
+                        
 			$model->attributes=$_POST['preventa'];
+                           echo "</br>";
+                        print_r($model->attributes);//exit;
                         $model->fecha=null;
                         $model->email_enviado = 1;
+                        //$model->fecha_agendado = $datos_enviados["fecha_agendado"];
+                        //$model->fecha_prueba = $datos_enviados["fecha_prueba"];
+                       
                         
 			if($model->save())
                         {
-                            /*
-                                //una aproximación
-                                $connection = Yii::app()->db;
-                                // an SQL with two placeholders ":username" and ":email"
-                                $sql="INSERT INTO tbl_user (username, email) VALUES(:username,:email)";
-                                $command=$connection->createCommand($sql);
-                                // replace the placeholder ":username" with the actual username value
-                                $command->bindParam(":username",$username,PDO::PARAM_STR);
-                                // replace the placeholder ":email" with the actual email value
-                                $command->bindParam(":email",$email,PDO::PARAM_STR);
-                                $command->execute();
-                                // insert another row with a new set of parameters
-                                $command->bindParam(":username",$username2,PDO::PARAM_STR);
-                                $command->bindParam(":email",$email2,PDO::PARAM_STR);
-                                $command->execute();
-                                //Otra aproximacion
-                                $sql = "insert into table (some_field) values (:some_value)";
-                                $parameters = array(":some_value"=>$some_value);
-                                Yii::app()->db->createCommand($sql)->execute($parameters);
-                                //-----------
-                             * *
-                             */
+                           
                                 
                                 $model_historico = new historico();
                                 $model_historico->setIsNewRecord(true);

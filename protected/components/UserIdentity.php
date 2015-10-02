@@ -61,11 +61,16 @@ class UserIdentity extends CUserIdentity
                             
                         }else{ 
                             $this->errorCode = self::ERROR_NONE;
-                            $this->_role = "vc";
+                            if($this->username == "pruebaver@somosvirtualcare.com")
+                                $this->_role = "axtel";
+                            else
+                                $this->_role = "vc";
+                                
                         }
                         
                     }else{
-                        //echo "no connection";exit;
+                       $this->addError('password',"No hay conexión con el servidor de validación");
+                        echo "no connection";exit;
                     }
                      $this->setState('role', $this->_role); //Definimos la nueva propiedad
                     return !$this->errorCode;

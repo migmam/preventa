@@ -1,13 +1,12 @@
 <div class="form">
 
 <?php 
-    //$estados = $model->estados;
+   
     $estados = estados::model()->findAll();
     $mi_lectura = "true";
     $mi_style ="background-color: #D8D8D8;";
    
-    //print_r($estados); exit;
-   
+  
     
     $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'preventa-form',
@@ -85,8 +84,9 @@
                 <?php     
                     $this->widget('ext.YiiDateTimePicker.jqueryDateTime', array(
                     'model' => $model,
+                    //'mode'=> 'datetime',
                     'attribute' => 'fecha_agendado',
-                    'options' => array(), //DateTimePicker options
+                    'options' => array('showSecond'=>false), //DateTimePicker options
                     'htmlOptions' => array(),
                     ));
                 ?>
@@ -100,6 +100,7 @@
 		<?php     
                     $this->widget('ext.YiiDateTimePicker.jqueryDateTime', array(
                     'model' => $model,
+                    //'mode'=> 'datetime',
                     'attribute' => 'fecha_prueba',
                     'options' => array(), //DateTimePicker options
                     'htmlOptions' => array(),

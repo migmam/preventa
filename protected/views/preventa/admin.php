@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Preventas'=>array('index'),
+	//'Preventas'=>array('index'),
 	'Manage',
 );
 
@@ -74,8 +74,8 @@ else
 		'fecha_prueba',
 		*/
                // 'fecha',
-		array(
-			'class'=>'CButtonColumn',
-		),
+		//array(
+		//	'class'=>'CButtonColumn',
+		//),
 	),
 )); ?>
