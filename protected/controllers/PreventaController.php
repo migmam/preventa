@@ -142,7 +142,7 @@ class PreventaController extends Controller
                                     {
                                         $cuerpo = Yii::app()->params['email_template'];
                                         $cuerpo = str_replace('#preventa#',$_POST['preventa']['cliente'],$cuerpo);
-                                        Controller::mailsend("mamartinez@somosvirtualcare.com","notreply@virtualcarecorp.com","Preventa app",$cuerpo);
+                                        Controller::mailsend($model->email_vendedor,"notreply@virtualcarecorp.com","Preventa app",$cuerpo);
                                     }
                                     
                                 }
