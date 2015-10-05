@@ -28,7 +28,7 @@ class Controller extends CController
         $mail->MsgHTML($message);
         $mail->AddAddress($to, "");
         if(!$mail->Send()) {
-            echo "Mailer Error: " . $mail->ErrorInfo; exit;
+             echo "Mailer Error: " . $mail->ErrorInfo; exit;
         }else {
             echo "Message sent!";
         }

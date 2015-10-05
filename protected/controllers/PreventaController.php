@@ -100,22 +100,23 @@ class PreventaController extends Controller
 
 		if(isset($_POST['preventa']))
 		{
-                        print_r($_POST['preventa']);//exit;
+                       // print_r($_POST['preventa']);
                         echo "</br>";
-                        print_r($model->attributes);//exit;
+                        //print_r($model->attributes);//exit;
                         $datos_enviados = $_POST['preventa'];
                         
 			$model->attributes=$_POST['preventa'];
                            echo "</br>";
-                        print_r($model->attributes);//exit;
+                        //print_r($model->attributes);exit;
                         $model->fecha=null;
-                        $model->email_enviado = 1;
+                        //$model->email_enviado = 1;
                         //$model->fecha_agendado = $datos_enviados["fecha_agendado"];
                         //$model->fecha_prueba = $datos_enviados["fecha_prueba"];
                        
                         
 			if($model->save())
                         {
+                               //echo $model->email_enviado; exit;
                            
                                 
                                 $model_historico = new historico();
@@ -145,6 +146,9 @@ class PreventaController extends Controller
                                         $cuerpo = str_replace('#email#',$_POST['preventa']['email_cliente'],$cuerpo);
                                         $cuerpo = str_replace('#telefono#',$_POST['preventa']['telefono_cliente'],$cuerpo);
                                         Controller::mailsend($model->email_vendedor,"notreply@virtualcarecorp.com","Preventa app",$cuerpo);
+                                        $model->email_enviado = 1;
+                                        $model ->save();
+                                        
                                     }
                                     
                                 }

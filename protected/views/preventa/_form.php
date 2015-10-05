@@ -60,6 +60,12 @@
             <?php echo $form->error($model, 'id_estado'); ?>
         </div>
         
+         <div class="row">
+            <?php echo $form->labelEx($model, 'email_enviado'); ?>
+            <?php echo $form->checkBox($model,'email_enviado'); //,  array('checked'=>'checked') ?>
+            <?php echo $form->error($model, 'email_enviado'); ?>
+        </div>
+        
         <div class="row">
 		<?php echo $form->labelEx($model,'fecha'); ?>
 		<?php echo $form->textField($model,'fecha',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
