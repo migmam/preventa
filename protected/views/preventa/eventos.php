@@ -82,7 +82,7 @@ foreach ($allevents as $item)
 
 
         
-if(count($eventos_hoy)>0){
+if(isset($eventos_hoy)){
     ksort($eventos_hoy);
     //Mostramos la tabla con los eventos de hoy
     echo "<table class='calendar'>";
