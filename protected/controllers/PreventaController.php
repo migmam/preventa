@@ -36,7 +36,7 @@ class PreventaController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','preventahistorico'),
+				'actions'=>array('create','update','preventahistorico','eventos'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -210,12 +210,17 @@ class PreventaController extends Controller
         /**
 	 * Manages all models.
 	 */
-	public function actionCambia_estado()
+	public function actionEventos()
 	{
-		$dataProvider=new CActiveDataProvider('preventa');
-		$this->render('cambia_estado',array(
-			'dataProvider'=>$dataProvider,
-		));
+           // echo "hola"; exit;
+            $model=new preventa('search');
+		$model->unsetAttributes();  // clear any default values
+		//$this->render('eventos',array(
+		//	'model'=>$this->loadModel(),
+		//));
+                $this->render('eventos',array(
+			'model'=>$model));
+            
 	}
         
           /**
@@ -223,7 +228,7 @@ class PreventaController extends Controller
 	 */
 	public function actionPreventahistorico()
 	{
-            ;
+            
 			
 		$dataProvider=new CActiveDataProvider('historico', array(
                     'sort'=>array(
