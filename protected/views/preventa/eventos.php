@@ -82,23 +82,26 @@ foreach ($allevents as $item)
 
 
         
-if(count($eventos_hoy)>0)
+if(count($eventos_hoy)>0){
     ksort($eventos_hoy);
-//Mostramos la tabla con los eventos de hoy
-echo "<table class='calendar'>";
-echo "<tr class='calendar-row'><td class='calendar-day-head'>Hora</td><td class='calendar-day-head'>Cliente</td></tr>";
-foreach($eventos_hoy as $item_hoy_key=>$item_value)
-{
-    //if(Yii::app()->user->role=="axtel")
-    //{
-    //    $enlace = CHtml::link(CHtml::encode($item_value['cliente']), array('preventa/view', 'id'=>$item_value['id']));
-    //}else{
-    //    $enlace = CHtml::link(CHtml::encode($item_value['cliente']), array('preventa/update', 'id'=>$item_value['id']));
-    //}
+    //Mostramos la tabla con los eventos de hoy
+    echo "<table class='calendar'>";
+    echo "<tr class='calendar-row'><td class='calendar-day-head'>Hora</td><td class='calendar-day-head'>Cliente</td></tr>";
+    foreach($eventos_hoy as $item_hoy_key=>$item_value)
+    {
+        //if(Yii::app()->user->role=="axtel")
+        //{
+        //    $enlace = CHtml::link(CHtml::encode($item_value['cliente']), array('preventa/view', 'id'=>$item_value['id']));
+        //}else{
+        //    $enlace = CHtml::link(CHtml::encode($item_value['cliente']), array('preventa/update', 'id'=>$item_value['id']));
+        //}
 
-    echo "<tr class='calendar-row'><td class='calendar-day-np'>".$item_hoy_key."</td><td class='calendar-day-np'>".$item_value['enlace']."</td></tr>";
+        echo "<tr class='calendar-row'><td class='calendar-day-np'>".$item_hoy_key."</td><td class='calendar-day-np'>".$item_value['enlace']."</td></tr>";
+    }
+    echo "</table>";
+}else{
+    echo "No hay eventos planificados para hoy";
 }
-echo "</table>";
 
 
 
