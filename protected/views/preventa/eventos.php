@@ -58,7 +58,7 @@ foreach ($allevents as $item)
     $elementos = array(
         "rdate" => $fecha,
         "html" => $enlace, //$item->cliente,
-        "url"=>"http://".$item->id,
+        //"url"=>"http://".$item->id,
     );
     array_push($events, $elementos);
     

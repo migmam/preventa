@@ -104,15 +104,22 @@ class AdvanceCalendarWidget extends CWidget
 	public $startForm;
 	public $closeForm;
 	public $events = array();
+        
 	
 	public $udate_key = 'rdate';
 	public $event_key = 'html';
-        public $anchor_key = 'url';
+       
+        //New for languages MAM
+        private $a_headings = array("en" =>array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'),
+                                   "es" =>array('Lunes','Martes','Miercoles','Jueves','Viernes','Sábado','Domingo'));
         
-        public $a_headings = array("en" =>array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'),
-                                   "es" =>array('Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sábado')
-                             );
+                           
 	public $ajaxRouteString; /* Controller to an ajax call */
+        
+        //New MAM
+        public $is_sunday_first_day;
+        public $weekend_days;
+        public $language;
 
 	/*
 	 * Grab month and year from GET, if present
@@ -124,6 +131,9 @@ class AdvanceCalendarWidget extends CWidget
             //echo "llega2"; exit;
 		date_default_timezone_set('Asia/Kolkata');
 		$ajaxRouteString = Yii::app()->controller->id."/cal";
+                $this->is_sunday_first_day = false;
+                $this->weekend_days = array(5,6);
+                $this->language = "es";
 		
 		if(isset($_GET['month']))
 			$this->month = $_GET['month'];
@@ -302,14 +312,49 @@ class AdvanceCalendarWidget extends CWidget
 		    
 		/* table headings */
 		//$headings = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-                $headings = $this->a_headings["es"];  //New
+                $headings = $this->a_headings[$this->language];  //New MAM
 		$this->calendar.= '<tr class="'. $this->style .'-row"><td class="'. $this->style .'-day-head">'
 			.implode('</td><td class="'. $this->style .'-day-head">',$headings).'</td></tr>';
 
 		/* days and weeks vars now ... */
-		$running_day = date('w',mktime(0,0,0,$this->month,1,$this->year));
-                //$running_day = (date('w',mktime(0,0,0,$this->month,1,$this->year)) + 6)%7;
-		$days_in_month = date('t',mktime(0,0,0,$this->month,1,$this->year));
+		$running_day    = date('w',mktime(0,0,0,$this->month,1,$this->year));
+                if(!$this->is_sunday_first_day)
+                {
+                    
+                    
+                    switch($running_day)
+                    {
+                        case 0:
+                            $tmp_running_day = 6;
+                        break;
+                        case 1:
+                            $tmp_running_day = 0;
+                        break;
+                        case 2:
+                            $tmp_running_day = 1;
+                        break;
+                        case 3:
+                            $tmp_running_day = 2;
+                        break;
+                        case 4:
+                            $tmp_running_day = 3;
+                        break;
+                        case 5:
+                            $tmp_running_day = 4;
+                        break;
+                        case 6:
+                            $tmp_running_day = 5;
+                        break;
+                        
+
+
+
+                    }
+                    $running_day = $tmp_running_day;
+                }
+                
+                //$running_day = (date('w',mktime(0,0,0,$this->month,1,$this->year)) + 7)%7;
+		$days_in_month  = date('t',mktime(0,0,0,$this->month,1,$this->year));
 		$days_in_this_week = 1;
 		$day_counter = 0;
 		$dates_array = array();
@@ -336,7 +381,7 @@ class AdvanceCalendarWidget extends CWidget
 			}
 			else			
 			{	
-				if(($running_day == "0") || ($running_day == "6"))
+				if(in_array($running_day,$this->weekend_days))
 				{
 				 $this->calendar.= '<td class="'. $this->style .'-weekend-day ">';
 				}
