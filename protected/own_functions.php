@@ -26,7 +26,7 @@ function changeDateToSpanish($date)
 //Obtienen la ip publica del servidor
 function get_own_public_ip() {
      $ipaddress = '';
-     $ipaddress = file_get_contents('http://api.externalip.net/ip');
+     $ipaddress = file_get_contents('http://icanhazip.com/');
      return $ipaddress; 
 }
 
