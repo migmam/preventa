@@ -15,6 +15,8 @@ class jqueryDateTime extends CInputWidget {
                 $minutes = str_pad($i, 2, 0, STR_PAD_LEFT);
                 $this->options['allowTimes'][] = $hour.':00';
                 $this->options['allowTimes'][] = $hour.':30';
+                $this->options['dayOfWeekStart'] = 1;
+                $this->options['lang'] = 'es';
             }
         }
         return parent::init();
