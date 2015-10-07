@@ -27,8 +27,8 @@
 /* by not setting a table width you get a table that will cover the size of the div or page you put it in  */
 table.calendar {
      border-left:1px solid #999;
-      width: 100%; 
-      table-layout: fixed; 
+      width: 100%; //New MAM
+      table-layout: fixed; //New MAM
 }
 /* Settings for the control menu */
 table.calendar-control {

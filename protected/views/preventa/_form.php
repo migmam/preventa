@@ -4,7 +4,7 @@
    
     $estados = estados::model()->findAll();
     $mi_lectura = "true";
-    $mi_style ="background-color: #D8D8D8;";
+    $mi_style ="background-color: #D8D8D8;color: black";
    
   
     
@@ -68,7 +68,9 @@
         
         <div class="row">
 		<?php echo $form->labelEx($model,'fecha'); ?>
-		<?php echo $form->textField($model,'fecha',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+		<?php echo CHtml::textField('Fecha', changeDatetoSpanish($model->fecha), array('disabled'=>'disabled','style'=>$mi_style)); 
+                
+                //echo $form->textField($model,'fecha',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
                 <?php echo $form->error($model,'fecha'); ?>
 	</div>
 
@@ -88,11 +90,14 @@
 		<?php echo $form->labelEx($model,'fecha_agendado'); ?>
 		<?php //echo $form->textField($model,'fecha_agendado',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
                 <?php     
+                    //$model->fecha_agendado=changeDateToSpanish($model->fecha_agendado);
                     $this->widget('ext.YiiDateTimePicker.jqueryDateTime', array(
                     'model' => $model,
+                   // 'value' => changeDateToSpanish($model->fecha_agendado),
+                   // 'name' => 'fecha_agendado',
                     //'mode'=> 'datetime',
                     'attribute' => 'fecha_agendado',
-                    'options' => array('showSecond'=>false), //DateTimePicker options
+                    //'options' => array('options'=>array("dateFormat"=>'d/m/Y')), //DateTimePicker options
                     'htmlOptions' => array(),
                     ));
                 ?>
@@ -104,11 +109,12 @@
 		<?php echo $form->labelEx($model,'fecha_prueba'); ?>
 		<?php //echo $form->textField($model,'fecha_prueba',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php     
+                    $model->fecha_prueba=changeDateToSpanish($model->fecha_prueba);
                     $this->widget('ext.YiiDateTimePicker.jqueryDateTime', array(
                     'model' => $model,
                     //'mode'=> 'datetime',
                     'attribute' => 'fecha_prueba',
-                    'options' => array(), //DateTimePicker options
+                   // 'options' => array("dateFormat"=>'dd/mm/yyyy'), //DateTimePicker options
                     'htmlOptions' => array(),
                     ));
                 ?>

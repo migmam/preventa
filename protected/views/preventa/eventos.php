@@ -45,11 +45,15 @@ foreach ($allevents as $item)
     
     if(Yii::app()->user->role=="axtel")
     {
-        $enlace = CHtml::link(CHtml::encode($item->cliente), array('preventa/view', 'id'=>$item->id));
+        $enlace = CHtml::link(CHtml::encode($item->cliente), array('preventa/view', 'id'=>$item->id)
+                , array('style'=>'color: red;')
+                );
         
         
     }else{
-        $enlace = CHtml::link(CHtml::encode($item->cliente), array('preventa/update', 'id'=>$item->id));
+        $enlace = CHtml::link(CHtml::encode($item->cliente), array('preventa/update', 'id'=>$item->id)
+                , array('style'=>'color: red; ')
+                );
     }
     
     
@@ -58,7 +62,6 @@ foreach ($allevents as $item)
     $elementos = array(
         "rdate" => $fecha,
         "html" => $enlace, //$item->cliente,
-        //"url"=>"http://".$item->id,
     );
     array_push($events, $elementos);
     
