@@ -70,8 +70,8 @@ echo "<p>".CHtml::link('Descargar cuestionario','cuestionario.doc')."</p>";
                         'header' =>'Estado',
                         'value'=>'$data->estado->estado',//valor del campo relacionado...no de id_estado
                         'filter'=>CHtml::listData(estados::model()->findAll(),'id','estado' ), //modelo estados
-                        //'htmlOptions' => array('style' => 'width: 190px;'),
-                        //'filterHtmlOptions' => array('style' => 'width: 190px;'),
+                        'htmlOptions' => array('style' => 'width: 190px;'),
+                        'filterHtmlOptions' => array('style' => 'width: 190px;'),
    
                  ),
 		/*
