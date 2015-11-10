@@ -7,4 +7,4 @@ $this->pageTitle=Yii::app()->name;
 <h1>Bienvenido a <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
 
 
-<p>Texto descripción aplicación</p>
+<p><?php echo Yii::t('translations','Welcome') ?></p>

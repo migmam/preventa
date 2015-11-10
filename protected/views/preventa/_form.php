@@ -1,10 +1,22 @@
 <div class="form">
 
 <?php 
+global $permite_escribir;
    
     $estados = estados::model()->findAll();
-    $mi_lectura = "true";
-    $mi_style ="background-color: #D8D8D8;color: black";
+    
+    
+        
+    //$permite_escribir = true;
+    if(Yii::app()->controller->action->id == "create")
+    {
+        $mi_lectura = "0";
+        $mi_style ="background-color: white;color: black";
+        
+    }else{
+        $mi_lectura = "1";
+        $mi_style ="background-color: #D8D8D8;color: black";
+    }
    
   
     
@@ -59,13 +71,19 @@
             <?php echo $form->dropDownList($model,'id_estado', CHtml::listData(estados::model()->findAll(),'id','estado')) ?>
             <?php echo $form->error($model, 'id_estado'); ?>
         </div>
-        
+        <?php
+        if(Yii::app()->controller->action->id != "create")
+        {
+            
+        ?>
          <div class="row">
             <?php echo $form->labelEx($model, 'email_enviado'); ?>
             <?php echo $form->checkBox($model,'email_enviado'); //,  array('checked'=>'checked') ?>
             <?php echo $form->error($model, 'email_enviado'); ?>
         </div>
         
+        
+    
         <div class="row">
 		<?php echo $form->labelEx($model,'fecha'); ?>
 		<?php echo CHtml::textField('Fecha', changeDatetoSpanish($model->fecha), array('disabled'=>'disabled','style'=>$mi_style)); 
@@ -79,6 +97,10 @@
 		<?php echo $form->textField($model,'id_estado',array('size'=>10,'maxlength'=>10)); ?>
 		<?php echo $form->error($model,'id_estado'); ?>
 	</div-->
+         <?php
+        }
+            
+        ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'observaciones'); ?>
@@ -86,6 +108,11 @@
 		<?php echo $form->error($model,'observaciones'); ?>
 	</div>
 
+        <?php
+        if(Yii::app()->controller->action->id != "create")
+        {
+            
+        ?>
 	<div class="row">
 		<?php echo $form->labelEx($model,'fecha_agendado'); ?>
 		<?php //echo $form->textField($model,'fecha_agendado',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
@@ -121,7 +148,10 @@
                 <?php echo $form->error($model,'fecha_prueba'); ?>
              <?php echo CHtml::button("Reset",array("onclick"=>"resetea('preventa_fecha_prueba')"));?>
             </div>
-    
+        <?php
+        }
+            
+        ?>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Grabar'); ?>

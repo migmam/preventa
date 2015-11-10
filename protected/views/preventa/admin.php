@@ -4,11 +4,11 @@ $this->breadcrumbs=array(
 	'Manage',
 );
 
-//$this->menu=array(
+$this->menu=array(
 //	array('label'=>'List preventa', 'url'=>array('index')),
-//	array('label'=>'Create preventa', 'url'=>array('create')),
+	array('label'=>'Create preventa', 'url'=>array('create')),
 //        array('label'=>'Entrar', 'url'=>array('view','id'=>'2')),
-//);
+);
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -34,9 +34,15 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <?php //echo"ID: ".Yii::app()->user->getId(); // echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); 
 
 if(Yii::app()->user->role=="axtel")
+{
     $mi_controller = "view";
-else
+    
+}else{
     $mi_controller =  "update";
+    echo CHtml::link('Crear preventa',array('preventa/create'));  
+}
+
+echo CHtml::link('Descargar cuestionario','cuestionario.doc');  
 ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
