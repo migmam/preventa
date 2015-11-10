@@ -39,10 +39,10 @@ if(Yii::app()->user->role=="axtel")
     
 }else{
     $mi_controller =  "update";
-    echo CHtml::link('Crear preventa',array('preventa/create'));  
+    echo "<p>".CHtml::link('Crear preventa',array('preventa/create'))."</p>";  
 }
 
-echo CHtml::link('Descargar cuestionario','cuestionario.doc');  
+echo "<p>".CHtml::link('Descargar cuestionario','cuestionario.doc')."</p>";  
 ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
