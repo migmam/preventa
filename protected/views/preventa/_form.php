@@ -22,6 +22,7 @@ global $permite_escribir;
     
     $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'preventa-form',
+        'htmlOptions' => array('enctype' => 'multipart/form-data'),
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -47,6 +48,12 @@ global $permite_escribir;
 		<?php echo $form->textField($model,'telefono_vendedor',array('size'=>20,'maxlength'=>20,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'telefono_vendedor'); ?>
 	</div>
+        
+        <div class="row">
+		<?php echo $form->labelEx($model,'producto_existente'); ?>
+		<?php echo $form->textField($model,'producto_existente',array('size'=>50,'maxlength'=>50,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+		<?php echo $form->error($model,'producto_existente'); ?>
+	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'cliente'); ?>
@@ -65,6 +72,30 @@ global $permite_escribir;
 		<?php echo $form->textField($model,'email_cliente',array('size'=>45,'maxlength'=>45,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'email_cliente'); ?>
 	</div>
+        
+    <div class="row">
+            <?php echo $form->labelEx($model, 'id_tipo'); ?>
+            <?php echo $form->dropDownList($model,'id_tipo', CHtml::listData(tipos::model()->findAll(),'id','tipo')) ?>
+            <?php echo $form->error($model, 'id_tipo'); ?>
+        </div>
+
+         <div class="row">
+            <?php echo $form->labelEx($model, 'id_solucion'); ?>
+            <?php echo $form->dropDownList($model,'id_solucion', CHtml::listData(soluciones::model()->findAll(),'id','solucion')) ?>
+            <?php echo $form->error($model, 'id_solucion'); ?>
+        </div>
+        
+         <div class="row">
+            <?php echo $form->labelEx($model, 'id_oferta'); ?>
+            <?php echo $form->dropDownList($model,'id_oferta', CHtml::listData(ofertas::model()->findAll(),'id','oferta')) ?>
+            <?php echo $form->error($model, 'id_oferta'); ?>
+        </div>
+        
+         <div class="row">
+            <?php echo $form->labelEx($model, 'id_complejidad'); ?>
+            <?php echo $form->dropDownList($model,'id_complejidad', CHtml::listData(complejidades::model()->findAll(),'id','complejidad')) ?>
+            <?php echo $form->error($model, 'id_complejidad'); ?>
+        </div>
         
          <div class="row">
             <?php echo $form->labelEx($model, 'id_estado'); ?>
@@ -136,7 +167,7 @@ global $permite_escribir;
 		<?php echo $form->labelEx($model,'fecha_prueba'); ?>
 		<?php //echo $form->textField($model,'fecha_prueba',array('readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php     
-                    $model->fecha_prueba=changeDateToSpanish($model->fecha_prueba);
+                    //$model->fecha_prueba=changeDateToSpanish($model->fecha_prueba);
                     $this->widget('ext.YiiDateTimePicker.jqueryDateTime', array(
                     'model' => $model,
                     //'mode'=> 'datetime',
@@ -150,13 +181,37 @@ global $permite_escribir;
             </div>
         <?php
         }
-            
+        if(Yii::app()->controller->action->id != "create")
+        {    
         ?>
+        <div class="row buttons">
+       
+        	<?php
+					$this->widget('CMultiFileUpload', array(
+						'name' => 'document',
+						'accept' => 'doc|docx', 
+						'duplicate' => 'Duplicate file', 
+						'denied' => 'Invalid file type', 
+					));
+					
+				?>
 
+        </div>
+        <?php  
+        }
+          
+        if(Yii::app()->controller->action->id != "create")
+        {
+            if(file_exists('./cuestionarios/cuestionario_'.$model->id.'.doc'))
+                echo "<div class='row buttons'><p>".CHtml::link('Descargar cuestionario','./cuestionarios/cuestionario_'.$model->id.'.doc')."</p></div>";  
+        }
+       
+       ?>
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Grabar'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Grabar'); ?>
 	</div>
-
-<?php $this->endWidget(); ?>
+ <?php 
+            $this->endWidget(); ?>
+     
 
 </div><!-- form -->

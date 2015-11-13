@@ -100,8 +100,27 @@ class PreventaController extends Controller
 
 		if(isset($_POST['preventa']))
 		{
+                    //print_r($_FILES); 
+                    //echo count($_FILES); exit;
+                    //exit;
+                        //Si ha subido un fichero entonces lo grabamos
+                        if($_FILES['document']['tmp_name'][0]!="")  
+                        {
+                            if (is_uploaded_file($_FILES['document']['tmp_name'][0])) 
+                            {
+                                if(move_uploaded_file($_FILES['document']['tmp_name'][0], './cuestionarios/cuestionario_'.$_GET['id'].'.doc')) 
+                                {
+                                    echo "El fichero es válido y se subió con éxito.\n"; 
+                                } else {
+                                    echo "¡Posible ataque de subida de ficheros!\n"; exit;
+                                }
+                            }else{
+                                   echo "¡Posible ataque de subida de ficheros!\n"; exit;
+                            }
+                            //$_FILES['document']['tmp_name'][0]
+                        }
                        // print_r($_POST['preventa']);
-                        echo "</br>";
+                        //echo "</br>";
                         //print_r($model->attributes);//exit;
                         $datos_enviados = $_POST['preventa'];
                         

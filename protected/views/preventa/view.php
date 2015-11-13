@@ -28,12 +28,29 @@ $this->menu=array(
 		'vendedor',
 		'email_vendedor',
 		'telefono_vendedor',
+                'producto_existente',
 		'cliente',
 		'telefono_cliente',
 		'email_cliente',
                 array(
+                    'label'=>'Tipo',
+                    'value'=>$model->tipo->tipo,
+                ),
+                array(
                     'label'=>'Estado',
                     'value'=>$model->estado->estado,
+                ),
+                array(
+                    'label'=>'Solucion',
+                    'value'=>$model->solucion->solucion,
+                ),
+                array(
+                    'label'=>'Oferta',
+                    'value'=>$model->oferta->oferta,
+                ),
+                array(
+                    'label'=>'Complejidad',
+                    'value'=>$model->complejidad->complejidad,
                 ),
                //array(
                //     'label'=>'Estado',
@@ -60,3 +77,7 @@ $this->menu=array(
                 'fecha',
 	),
 )); ?>
+<?php
+ if(file_exists('./cuestionarios/cuestionario_'.$model->id.'.doc'))
+        echo "<p>".CHtml::link('Descargar cuestionario','./cuestionarios/cuestionario_'.$model->id.'.doc')."</p>";   
+ ?>

@@ -48,3 +48,7 @@
 	*/ ?>
 
 </div>
+<?php
+ if(file_exists('./cuestionarios/cuestionario_'.$model->id.'.doc'))
+        echo "<p>".CHtml::link('Descargar cuestionario','cuestionario_'.$model->id.'.doc')."</p>";   
+ ?>

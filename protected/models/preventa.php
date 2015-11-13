@@ -34,8 +34,9 @@ class preventa extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('vendedor, email_vendedor, telefono_vendedor, cliente, telefono_cliente, email_cliente, id_estado', 'required'),
+			array('vendedor, email_vendedor, telefono_vendedor, cliente, telefono_cliente, email_cliente, id_estado, id_tipo, id_solucion, id_oferta, id_complejidad', 'required'),
 			array('vendedor, cliente', 'length', 'max'=>60),
+                        array('producto_existente', 'length', 'max'=>50),
 			array('email_vendedor, email_cliente', 'length', 'max'=>45),
 			array('telefono_vendedor, telefono_cliente', 'length', 'max'=>20),
 			array('id_estado', 'length', 'max'=>10),
@@ -58,6 +59,10 @@ class preventa extends CActiveRecord
 		return array(
       
                     'estado' => array(self::BELONGS_TO, 'estados', 'id_estado'),
+                    'tipo'  => array(self::BELONGS_TO, 'tipos', 'id_tipo'),
+                    'complejidad'  => array(self::BELONGS_TO, 'complejidades', 'id_complejidad'),
+                    'solucion'  => array(self::BELONGS_TO, 'soluciones', 'id_solucion'),
+                    'oferta'  => array(self::BELONGS_TO, 'ofertas', 'id_oferta'),
     
 		);
 	}
@@ -76,11 +81,16 @@ class preventa extends CActiveRecord
 			'telefono_cliente' => 'Telefono Cliente',
 			'email_cliente' => 'Email Cliente',
 			'id_estado' => 'Estado',
+                        'id_oferta' => 'Oferta',
+                        'id_complejidad' => 'Complejidad',
+                        'id_solucion' => 'Solucion',
+                        'id_tipo' => 'Tipo',
 			'observaciones' => 'Observaciones',
 			'fecha_agendado' => 'Fecha Agendado',
 			'fecha_prueba' => 'Fecha Prueba',
                         'fecha' => 'Fecha estado',
-                        'email_enviado'=>'Email enviado'
+                        'email_enviado'=>'Email enviado',
+                        'producto_existente'=>'Producto existente'
 		);
 	}
 
