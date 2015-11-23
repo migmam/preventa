@@ -15,6 +15,18 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('telefono_vendedor')); ?>:</b>
 	<?php echo CHtml::encode($data->telefono_vendedor); ?>
 	<br />
+        
+        <b><?php echo CHtml::encode($data->getAttributeLabel('gestor')); ?>:</b>
+	<?php echo CHtml::encode($data->vendedor); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('email_gestor')); ?>:</b>
+	<?php echo CHtml::encode($data->email_vendedor); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('telefono_gestor')); ?>:</b>
+	<?php echo CHtml::encode($data->telefono_vendedor); ?>
+	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('cliente')); ?>:</b>
 	<?php echo CHtml::encode($data->cliente); ?>

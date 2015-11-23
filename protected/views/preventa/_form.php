@@ -5,7 +5,7 @@ global $permite_escribir;
    
     $estados = estados::model()->findAll();
     
-    
+    //echo Yii::app()->user->role != 'vc';
         
     //$permite_escribir = true;
     if(Yii::app()->controller->action->id == "create")
@@ -17,6 +17,12 @@ global $permite_escribir;
         $mi_lectura = "1";
         $mi_style ="background-color: #D8D8D8;color: black";
     }
+    
+    if(Yii::app()->user->role != 'vc')
+        $permiso = array("disabled"=>"true");
+    else 
+        $permiso = array();
+         
    
   
     
@@ -44,9 +50,32 @@ global $permite_escribir;
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'telefono_vendedor'); ?>
-            
 		<?php echo $form->textField($model,'telefono_vendedor',array('size'=>20,'maxlength'=>20,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'telefono_vendedor'); ?>
+	</div>
+        
+        <div class="row">
+		<?php echo $form->labelEx($model,'gestor'); ?>
+ 		<?php echo $form->textField($model,'gestor',array('size'=>60,'maxlength'=>60,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+		<?php echo $form->error($model,'gestor'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'email_gestor'); ?>
+ 		<?php echo $form->textField($model,'email_gestor',array('size'=>45,'maxlength'=>45,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+		<?php echo $form->error($model,'email_gestor'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'telefono_gestor'); ?>
+		<?php echo $form->textField($model,'telefono_gestor',array('size'=>20,'maxlength'=>20,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+		<?php echo $form->error($model,'telefono_gestor'); ?>
+	</div>
+        
+       	<div class="row">
+		<?php echo $form->labelEx($model,'codigo_contrato'); ?>
+		<?php echo $form->textField($model,'codigo_contrato',array('size'=>20,'maxlength'=>20,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+		<?php echo $form->error($model,'codigo_contrato'); ?>
 	</div>
         
         <div class="row">
@@ -75,31 +104,31 @@ global $permite_escribir;
         
     <div class="row">
             <?php echo $form->labelEx($model, 'id_tipo'); ?>
-            <?php echo $form->dropDownList($model,'id_tipo', CHtml::listData(tipos::model()->findAll(),'id','tipo')) ?>
+            <?php echo $form->dropDownList($model,'id_tipo', CHtml::listData(tipos::model()->findAll(),'id','tipo'),$permiso) ?>
             <?php echo $form->error($model, 'id_tipo'); ?>
         </div>
 
          <div class="row">
             <?php echo $form->labelEx($model, 'id_solucion'); ?>
-            <?php echo $form->dropDownList($model,'id_solucion', CHtml::listData(soluciones::model()->findAll(),'id','solucion')) ?>
+            <?php echo $form->dropDownList($model,'id_solucion', CHtml::listData(soluciones::model()->findAll(),'id','solucion'),$permiso) ?>
             <?php echo $form->error($model, 'id_solucion'); ?>
         </div>
         
          <div class="row">
             <?php echo $form->labelEx($model, 'id_oferta'); ?>
-            <?php echo $form->dropDownList($model,'id_oferta', CHtml::listData(ofertas::model()->findAll(),'id','oferta')) ?>
+            <?php echo $form->dropDownList($model,'id_oferta', CHtml::listData(ofertas::model()->findAll(),'id','oferta'),$permiso) ?>
             <?php echo $form->error($model, 'id_oferta'); ?>
         </div>
         
          <div class="row">
             <?php echo $form->labelEx($model, 'id_complejidad'); ?>
-            <?php echo $form->dropDownList($model,'id_complejidad', CHtml::listData(complejidades::model()->findAll(),'id','complejidad')) ?>
+            <?php echo $form->dropDownList($model,'id_complejidad', CHtml::listData(complejidades::model()->findAll(),'id','complejidad'),$permiso) ?>
             <?php echo $form->error($model, 'id_complejidad'); ?>
         </div>
         
          <div class="row">
             <?php echo $form->labelEx($model, 'id_estado'); ?>
-            <?php echo $form->dropDownList($model,'id_estado', CHtml::listData(estados::model()->findAll(),'id','estado')) ?>
+            <?php echo $form->dropDownList($model,'id_estado', CHtml::listData(estados::model()->findAll(),'id','estado'),$permiso) ?>
             <?php echo $form->error($model, 'id_estado'); ?>
         </div>
         <?php
@@ -156,7 +185,7 @@ global $permite_escribir;
                     //'mode'=> 'datetime',
                     'attribute' => 'fecha_agendado',
                     //'options' => array('options'=>array("dateFormat"=>'d/m/Y')), //DateTimePicker options
-                    'htmlOptions' => array(),
+                    'htmlOptions' => $permiso,
                     ));
                 ?>
 		<?php echo $form->error($model,'fecha_agendado'); ?>

@@ -34,12 +34,13 @@ class preventa extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('vendedor, email_vendedor, telefono_vendedor, cliente, telefono_cliente, email_cliente, id_estado, id_tipo, id_solucion, id_oferta, id_complejidad', 'required'),
-			array('vendedor, cliente', 'length', 'max'=>60),
+			array('vendedor, email_vendedor, telefono_vendedor, cliente, telefono_cliente, email_cliente, id_estado, id_tipo, id_complejidad, id_solucion, id_oferta', 'required'),
+			array('vendedor, cliente, gestor', 'length', 'max'=>60),
                         array('producto_existente', 'length', 'max'=>50),
-			array('email_vendedor, email_cliente', 'length', 'max'=>45),
-			array('telefono_vendedor, telefono_cliente', 'length', 'max'=>20),
-			array('id_estado', 'length', 'max'=>10),
+			array('email_vendedor, email_cliente, email_gestor', 'length', 'max'=>45),
+			array('telefono_vendedor, telefono_cliente, telefono_gestor', 'length', 'max'=>20),
+			array('id_estado, id_tipo, id_complejidad, id_solucion, id_oferta', 'length', 'max'=>10),
+                        array('codigo_contrato', 'length', 'max'=>20),
                         array('observaciones', 'filter','filter' => array('CHtml', 'encode')),
                         array('email_enviado', 'numerical', 'integerOnly'=>true),
                         array('fecha_agendado,fecha_prueba,fecha', 'safe'),
@@ -90,7 +91,13 @@ class preventa extends CActiveRecord
 			'fecha_prueba' => 'Fecha Prueba',
                         'fecha' => 'Fecha estado',
                         'email_enviado'=>'Email enviado',
-                        'producto_existente'=>'Producto existente'
+                        'producto_existente'=>'Producto existente',
+                        'gestor' => 'Gestor',
+			'email_gestor' => 'Email Gestor',
+			'telefono_gestor' => 'Telefono Gestor',
+                    	'codigo_contrato' => 'Codigo contrato'
+                    
+                    
 		);
 	}
 

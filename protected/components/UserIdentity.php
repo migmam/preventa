@@ -61,10 +61,18 @@ class UserIdentity extends CUserIdentity
                             
                         }else{ 
                             $this->errorCode = self::ERROR_NONE;
-                            if($this->username == "pruebaver@somosvirtualcare.com")
+                            
+                            if($this->username == "csttroncal@somosvirtualcare.com")
+                                $this->_role = "vc";
+                            elseif($this->username == "axtelgestion@somosvirtualcare.com")
+                                $this->_role = "axtel+";
+                            elseif($this->username == "axtellectura@somosvirtualcare.com")
                                 $this->_role = "axtel";
                             else
-                                $this->_role = "vc";
+                                $this->errorCode = self::ERROR_PASSWORD_INVALID;
+                                
+                            
+                            
                                 
                         }
                         

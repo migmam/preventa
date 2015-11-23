@@ -28,6 +28,10 @@ $this->menu=array(
 		'vendedor',
 		'email_vendedor',
 		'telefono_vendedor',
+                'gestor',
+		'email_gestor',
+		'telefono_gestor',
+                'codigo_contrato',
                 'producto_existente',
 		'cliente',
 		'telefono_cliente',
@@ -78,6 +82,7 @@ $this->menu=array(
 	),
 )); ?>
 <?php
+
  if(file_exists('./cuestionarios/cuestionario_'.$model->id.'.doc'))
         echo "<p>".CHtml::link('Descargar cuestionario','./cuestionarios/cuestionario_'.$model->id.'.doc')."</p>";   
  ?>

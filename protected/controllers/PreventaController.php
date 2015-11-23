@@ -148,7 +148,8 @@ class PreventaController extends Controller
                                 $model_historico->id_estado      = $_POST['preventa']['id_estado'];
                                 //$model_historico->fecha = 0;
                                 //$model->email = $_GET['email'];
-                                if ($model_historico->validate()){
+                                if ($model_historico->validate())
+                                {
                                     $model_historico->save();
                                 } else {
                                     print_r($model_historico->errors);
@@ -209,6 +210,7 @@ class PreventaController extends Controller
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
+            
 	}
 
 	/**
