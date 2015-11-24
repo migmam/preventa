@@ -139,13 +139,15 @@ global $permite_escribir;
         <?php
         if(Yii::app()->controller->action->id != "create")
         {
-            
+         /*   
         ?>
          <div class="row">
             <?php echo $form->labelEx($model, 'email_enviado'); ?>
             <?php echo $form->checkBox($model,'email_enviado'); //,  array('checked'=>'checked') ?>
             <?php echo $form->error($model, 'email_enviado'); ?>
         </div>
+          * 
+          */?>
         
         
     

@@ -93,6 +93,8 @@ class PreventaController extends Controller
 	public function actionUpdate()
 	{
 		$model=$this->loadModel();
+                
+                $old_estado = $model->id_estado;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -158,22 +160,38 @@ class PreventaController extends Controller
                                 }
                                // print_r(Yii::app()->params['_d:CMap:private']);
                                 //echo $_POST['preventa']['id_estado'].'=='.Yii::app()->params['estado_para_informar'];exit;
-                                if($_POST['preventa']['id_estado'] == Yii::app()->params['estado_para_informar'])
+                                //
+                                //if($_POST['preventa']['id_estado'] == Yii::app()->params['estado_para_informar'])
+                                //{
+                                //    if($_POST['preventa']["email_enviado"] != 1)
+                                //    {
+                                if($_POST['preventa']['id_estado'] != $old_estado)
                                 {
-                                    if($_POST['preventa']["email_enviado"] != 1)
+                                    if($_POST['preventa']['id_estado'] <8)
                                     {
-                                        $cuerpo = Yii::app()->params['email_template'];
-                                        $cuerpo = str_replace('#preventa#',$_POST['preventa']['cliente'],$cuerpo);
-                                        $cuerpo = str_replace('#email#',$_POST['preventa']['email_cliente'],$cuerpo);
-                                        $cuerpo = str_replace('#telefono#',$_POST['preventa']['telefono_cliente'],$cuerpo);
+                                            $cuerpo = Yii::app()->params['email_template_preventa'];
+                                            
+                                    }else{
+                                            $cuerpo = Yii::app()->params['email_template_entrega'];
+                                            
+                                   
+                                    }     
+                                    
+                                    $cuerpo = str_replace('#estado#',$model->estado->estado,$cuerpo);
+                                    $cuerpo = str_replace('#preventa#',$_POST['preventa']['cliente'],$cuerpo);
+                                    $cuerpo = str_replace('#email#',$_POST['preventa']['email_cliente'],$cuerpo);
+                                    $cuerpo = str_replace('#telefono#',$_POST['preventa']['telefono_cliente'],$cuerpo);
+                                    $cuerpo = str_replace('#observaciones#',$_POST['preventa']['observaciones'],$cuerpo);
+                                            
                                         Controller::mailsend($model->email_vendedor,"notreply@virtualcarecorp.com","Preventa app",$cuerpo);
                                         $model=$this->loadModel();
                                         $model->email_enviado = 1;
                                         $model ->save();
-                                        
-                                    }
-                                    
                                 }
+                                        
+                                //    }
+                                    
+                                //}
 				$this->redirect(array('update','id'=>$model->id));
                         }
 		}
