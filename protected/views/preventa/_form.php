@@ -19,9 +19,14 @@ global $permite_escribir;
     }
     
     if(Yii::app()->user->role != 'vc')
+    {
+        $sololectura = true;
         $permiso = array("disabled"=>"true");
-    else 
+        
+    }else{ 
         $permiso = array();
+        $sololectura = false;
+    }
          
    
   
@@ -128,7 +133,7 @@ global $permite_escribir;
         
          <div class="row">
             <?php echo $form->labelEx($model, 'id_estado'); ?>
-            <?php echo $form->dropDownList($model,'id_estado', CHtml::listData(estados::model()->findAll(),'id','estado'),$permiso) ?>
+            <?php echo $form->dropDownList($model,'id_estado', CHtml::listData(estados::model()->findAll(),'id','estado')) ?>
             <?php echo $form->error($model, 'id_estado'); ?>
         </div>
         <?php
@@ -189,7 +194,9 @@ global $permite_escribir;
                     ));
                 ?>
 		<?php echo $form->error($model,'fecha_agendado'); ?>
-                <?php echo CHtml::button("Reset",array("onclick"=>"resetea('preventa_fecha_agendado')"));?>
+                <?php 
+                IF(!$sololectura)
+                    echo CHtml::button("Reset",array("onclick"=>"resetea('preventa_fecha_agendado')"));?>
 	</div>
 
 	<div class="row">
