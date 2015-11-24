@@ -29,6 +29,7 @@ global $permite_escribir;
     }
          
    
+   
   
     
     $form=$this->beginWidget('CActiveForm', array(

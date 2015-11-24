@@ -85,6 +85,73 @@ class PreventaController extends Controller
 			'model'=>$model,
 		));
 	}
+        
+        private function chequeaDisponibilidad($fecha_seleccionada, $tipo, $id)
+        {
+            
+            $valido = 0;
+            $fecha_seleccionada_tstmp= strtotime($fecha_seleccionada);
+            
+            //No evaluamos tiempos pasados
+            if($fecha_seleccionada_tstmp<time())
+            {
+                //echo "novalida"; exit;
+               
+                return $valido;
+            }
+            
+            
+            if($tipo=='fecha_agendado')
+            {
+                $list= Yii::app()->db->createCommand("select fecha_agendado as fecha, id from preventa where fecha_agendado is not null and fecha_agendado<>'0000-00-00 00:00:00'")->queryAll();
+                $intervalo = 3600;
+            }else{
+                $list= Yii::app()->db->createCommand("select fecha_prueba as fecha, id from preventa where fecha_prueba is not null and fecha_prueba<>'0000-00-00 00:00:00'")->queryAll();
+                $intervalo = 5400;
+            }
+            
+           
+            foreach($list as $item)
+            {
+                //process each item here
+                //$rs[]=$item['id'];
+                if($item['id'] != $id) //No evaluamos las fechas del propio registro
+                {
+                    $timestamp_fecha_registro = strtotime($item["fecha"]);
+               
+                    if($fecha_seleccionada_tstmp>$timestamp_fecha_registro)
+                    {
+                        if($fecha_seleccionada_tstmp-$timestamp_fecha_registro < $intervalo)
+                            $valido = 1;
+                    }
+                    if($fecha_seleccionada_tstmp<$timestamp_fecha_registro)
+                    {
+                        if($timestamp_fecha_registro-$fecha_seleccionada_tstmp < $intervalo)
+                            $valido = 1;
+                        
+                    }
+                    if($timestamp_fecha_registro==$fecha_seleccionada_tstmp)
+                    {
+                        $valido = 1;
+                    }
+                }
+
+                    //if($fecha_seleccionada_tstmp-$timestamp_fecha_registro < $intervalo || $timestamp_fecha_registro+$intervalo>$fecha_seleccionada_tstmp )
+                    //{
+                    //    $valido = 1;
+                
+                    //}
+                
+            }
+                
+                
+            
+            
+           
+            return $valido;
+            
+            
+        }
 
 	/**
 	 * Updates a particular model.
@@ -95,12 +162,69 @@ class PreventaController extends Controller
 		$model=$this->loadModel();
                 
                 $old_estado = $model->id_estado;
+                $mensaje = "";
+                $resultado = 0;
+                
+                if(isset($_POST['preventa']['fecha_agendado']))
+                {
+                    $_POST['preventa']['fecha_agendado'] = str_replace('/','-', $_POST['preventa']['fecha_agendado']);
+                    $_POST['preventa']['fecha_agendado'] = substr($_POST['preventa']['fecha_agendado'],0,16).":00";
+                }
+                if(isset($_POST['preventa']['fecha_prueba']))
+                {
+                    $_POST['preventa']['fecha_prueba'] = str_replace('/','-', $_POST['preventa']['fecha_prueba']);
+                    $_POST['preventa']['fecha_prueba'] = substr($_POST['preventa']['fecha_prueba'],0,16).":00";
+                }
+                
+                
+     
+                if(isset($_POST['preventa']['fecha_agendado']) &&  isset($_POST['preventa']['fecha_prueba']))
+                {
+                    
+                    //echo $_POST['preventa']['fecha_agendado']."==".$_POST['preventa']['fecha_prueba']; exit;
+                    
+                     if($_POST['preventa']['fecha_agendado']==$_POST['preventa']['fecha_prueba'])
+                     {
+                         $resultado = 1;
+                         $mensaje = "Fechas no pueden ser iguales";
+                     }
+                    
+                }
+                
+                 if(isset($_POST['preventa']['fecha_agendado']) && $resultado==0)
+                 {
+                     if(!empty($_POST['preventa']['fecha_agendado']) && $_POST['preventa']['fecha_agendado']!='0000-00-00 00:00:00')
+                     {
+                         $resultado = $this->chequeaDisponibilidad($_POST['preventa']['fecha_agendado'],"fecha_agendado",$model->id);
+                         
+                         if($resultado==1){
+                             $mensaje = "Fecha agendado no valida ".$_POST['preventa']['fecha_agendado']; 
+                         }
+                     }
+                 }
+                 
+                 if(isset($_POST['preventa']['fecha_prueba']) && $resultado==0)
+                 {
+                     if(!empty($_POST['preventa']['fecha_prueba']) && $_POST['preventa']['fecha_prueba']!='0000-00-00 00:00:00')
+                     {
+                         $resultado = $this->chequeaDisponibilidad($_POST['preventa']['fecha_prueba'],"fecha_prueba",$model->id);
+                         
+                         if($resultado==1){
+                             $mensaje = "Fecha prueba no valida ".$_POST['preventa']['fecha_prueba'];
+                         }
+                     }
+                 }
+                 
+                 
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
                 $email_enviado = $model->email_enviado;
+                
+               // print_r($resultado); exit;
+                 //$resultado=true;
 
-		if(isset($_POST['preventa']))
+		if(isset($_POST['preventa']) && $resultado==0)
 		{
                     //print_r($_FILES); 
                     //echo count($_FILES); exit;
@@ -146,7 +270,9 @@ class PreventaController extends Controller
                                 $model_historico->id = null;
                                 if(isset($_POST['preventa']['fecha_agendado']))
                                     $model_historico->fecha_agendado = $_POST['preventa']['fecha_agendado'];
-                                $model_historico->fecha_prueba   = $_POST['preventa']['fecha_prueba'];
+                                
+                                if(isset($_POST['preventa']['fecha_prueba']))
+                                    $model_historico->fecha_prueba   = $_POST['preventa']['fecha_prueba'];
                                 $model_historico->observaciones  = $_POST['preventa']['observaciones'];
                                 $model_historico->id_estado      = $_POST['preventa']['id_estado'];
                                 //$model_historico->fecha = 0;
@@ -202,7 +328,7 @@ class PreventaController extends Controller
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$model,'resultado'=>$resultado,'mensaje'=>$mensaje
 		));
 	}
 

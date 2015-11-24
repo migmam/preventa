@@ -23,10 +23,16 @@ $this->menu=array(
 //$allevents = preventa::model()->findAllBySql('select id, id_estado, cliente, fecha_agendado as fecha, 1 as tipo from preventa where (year(fecha_agendado)=YEAR(NOW()) and month(fecha_agendado)=month(now()))
 //union
 //select id, id_estado, cliente, fecha_prueba as fecha, 2 as tipo from preventa where (year(fecha_prueba)=YEAR(NOW()) and month(fecha_prueba)=month(now()) )or (year(fecha_prueba)=YEAR(NOW()) and month(fecha_prueba)=month(now()))');
-$allevents_a =  Yii::app()->db->createCommand('select id, id_estado, cliente, fecha_agendado, fecha_prueba, 1 as tipo from preventa where (year(fecha_agendado)=YEAR(NOW()) and month(fecha_agendado)=month(now()))
+$allevents_a =  Yii::app()->db->createCommand('select id, id_estado, cliente, fecha_agendado, fecha_prueba, 1 as tipo, fecha_agendado as fecha from preventa where (year(fecha_agendado)=YEAR(NOW()) and month(fecha_agendado)=month(now()))
 union
-select id, id_estado, cliente, fecha_agendado, fecha_prueba, 2 as tipo from preventa where (year(fecha_prueba)=YEAR(NOW()) and month(fecha_prueba)=month(now()) )
-order by tipo,fecha_agendado,fecha_prueba')->queryAll();
+select id, id_estado, cliente, fecha_agendado, fecha_prueba, 2 as tipo, fecha_prueba as fecha from preventa where (year(fecha_prueba)=YEAR(NOW()) and month(fecha_prueba)=month(now()) ) 
+order by fecha')->queryAll();
+
+//ordenado por tipos
+//select id, id_estado, cliente, fecha_agendado, fecha_prueba, 1 as tipo from preventa where (year(fecha_agendado)=YEAR(NOW()) and month(fecha_agendado)=month(now()))
+//union
+//select id, id_estado, cliente, fecha_agendado, fecha_prueba, 2 as tipo from preventa where (year(fecha_prueba)=YEAR(NOW()) and month(fecha_prueba)=month(now()) )
+//order by tipo,fecha_agendado,fecha_prueba
     
 //Si se quiere ordenado global (no por tipos):
 //select id, id_estado, cliente, fecha_agendado, fecha_prueba, 1 as tipo, fecha_agendado as fecha from preventa where (year(fecha_agendado)=YEAR(NOW()) and month(fecha_agendado)=month(now()))

@@ -24,4 +24,12 @@ $this->menu=array(
 
 <h1>Ficha preventa</h1>
 
+<?php
+ if(isset($resultado))
+    {
+        if($resultado==1)
+            echo "<p style='color: red; font-size: 16px'>".$mensaje."</p>";
+    }
+?>
+
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
