@@ -142,7 +142,8 @@ class PreventaController extends Controller
                                 $model_historico->setIsNewRecord(true);
                                 $model_historico->id_preventa = $_GET['id'];
                                 $model_historico->id = null;
-                                $model_historico->fecha_agendado = $_POST['preventa']['fecha_agendado'];
+                                if(isset($_POST['preventa']['fecha_agendado']))
+                                    $model_historico->fecha_agendado = $_POST['preventa']['fecha_agendado'];
                                 $model_historico->fecha_prueba   = $_POST['preventa']['fecha_prueba'];
                                 $model_historico->observaciones  = $_POST['preventa']['observaciones'];
                                 $model_historico->id_estado      = $_POST['preventa']['id_estado'];
