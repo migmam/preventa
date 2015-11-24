@@ -169,9 +169,11 @@ class PreventaController extends Controller
                                 {
                                     if($_POST['preventa']['id_estado'] <8)
                                     {
+                                            $email_destino = $model->email_vendedor;
                                             $cuerpo = Yii::app()->params['email_template_preventa'];
                                             
                                     }else{
+                                            $email_destino = $model->email_gestor;
                                             $cuerpo = Yii::app()->params['email_template_entrega'];
                                             
                                    
@@ -182,11 +184,14 @@ class PreventaController extends Controller
                                     $cuerpo = str_replace('#email#',$_POST['preventa']['email_cliente'],$cuerpo);
                                     $cuerpo = str_replace('#telefono#',$_POST['preventa']['telefono_cliente'],$cuerpo);
                                     $cuerpo = str_replace('#observaciones#',$_POST['preventa']['observaciones'],$cuerpo);
-                                            
-                                        Controller::mailsend($model->email_vendedor,"notreply@virtualcarecorp.com","Preventa app",$cuerpo);
-                                        $model=$this->loadModel();
-                                        $model->email_enviado = 1;
-                                        $model ->save();
+                                         
+                                    if(!empty($email_destino))
+                                    {
+                                        Controller::mailsend($email_destino,"notreply@virtualcarecorp.com","Preventa app",$cuerpo);
+                                    }
+                                    $model=$this->loadModel();
+                                    $model->email_enviado = 1;
+                                    $model ->save();
                                 }
                                         
                                 //    }
