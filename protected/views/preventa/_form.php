@@ -18,7 +18,7 @@ global $permite_escribir;
         $mi_style ="background-color: #D8D8D8;color: black";
     }
     
-    if(Yii::app()->user->role != 'vc')
+    if(Yii::app()->user->role != 'vc' && Yii::app()->controller->action->id != "create")
     {
         $sololectura = true;
         $permiso = array("disabled"=>"true");
