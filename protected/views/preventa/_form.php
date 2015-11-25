@@ -10,12 +10,12 @@ global $permite_escribir;
     //$permite_escribir = true;
     if(Yii::app()->controller->action->id == "create")
     {
-        $mi_lectura = "0";
-        $mi_style ="background-color: white;color: black";
+        //$mi_lectura = "0";
+        //$mi_style ="background-color: white;color: black";
         
     }else{
-        $mi_lectura = "1";
-        $mi_style ="background-color: #D8D8D8;color: black";
+       // $mi_lectura = "1";
+       // $mi_style ="background-color: #D8D8D8;color: black";
     }
     
     if(Yii::app()->user->role != 'vc' && Yii::app()->controller->action->id != "create")
@@ -23,9 +23,17 @@ global $permite_escribir;
         $sololectura = true;
         $permiso = array("disabled"=>"true");
         
+        $mi_lectura = "1";
+        $mi_style ="background-color: #D8D8D8;color: black";
+        
+        
+        
     }else{ 
         $permiso = array();
         $sololectura = false;
+        
+        $mi_lectura = "0";
+        $mi_style ="background-color: white;color: black";
     }
          
    
@@ -59,7 +67,11 @@ global $permite_escribir;
 		<?php echo $form->textField($model,'telefono_vendedor',array('size'=>20,'maxlength'=>20,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'telefono_vendedor'); ?>
 	</div>
-        
+         <?php
+        if(Yii::app()->controller->action->id != "create")
+        {
+            
+        ?>
         <div class="row">
 		<?php echo $form->labelEx($model,'gestor'); ?>
  		<?php echo $form->textField($model,'gestor',array('size'=>60,'maxlength'=>60,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
@@ -77,6 +89,9 @@ global $permite_escribir;
 		<?php echo $form->textField($model,'telefono_gestor',array('size'=>20,'maxlength'=>20,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
 		<?php echo $form->error($model,'telefono_gestor'); ?>
 	</div>
+         <?php
+        }  
+        ?>
         
        	<div class="row">
 		<?php echo $form->labelEx($model,'codigo_contrato'); ?>
