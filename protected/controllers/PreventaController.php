@@ -86,11 +86,11 @@ class PreventaController extends Controller
                             //$cuerpo = str_replace('#email#',$_POST['preventa']['email_cliente'],$cuerpo);
                             //$cuerpo = str_replace('#telefono#',$_POST['preventa']['telefono_cliente'],$cuerpo);
                             //$cuerpo = str_replace('#observaciones#',$_POST['preventa']['observaciones'],$cuerpo);
-                            $cuerpo = "Creada preventa";
+                            $cuerpo = "<p>Se ha creado una nueva preventa. Cliente:  ".$_POST['preventa']['cliente']."</p>";
                                      
                             if(!empty($email_destino))
                             {
-                                Controller::mailsend($email_destino,"notreply@virtualcarecorp.com","Preventa app",$cuerpo);
+                                Controller::mailsend($email_destino,"notreply@virtualcarecorp.com","Preventa Creada",$cuerpo);
                             }
                             $this->redirect(array('view','id'=>$model->id));
                         }
