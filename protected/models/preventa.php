@@ -38,6 +38,7 @@ class preventa extends CActiveRecord
 			array('vendedor, cliente, gestor', 'length', 'max'=>60),
                         array('producto_existente', 'length', 'max'=>50),
 			array('email_vendedor, email_cliente, email_gestor', 'length', 'max'=>45),
+                        array('email_vendedor, email_cliente, email_gestor', 'email', 'checkMX'=>true),
 			array('telefono_vendedor, telefono_cliente, telefono_gestor', 'length', 'max'=>20),
 			array('id_estado, id_tipo, id_complejidad, id_solucion, id_oferta', 'length', 'max'=>10),
                         array('codigo_contrato', 'length', 'max'=>20),

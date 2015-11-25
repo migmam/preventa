@@ -86,11 +86,18 @@ class PreventaController extends Controller
 		));
 	}
         
-        private function chequeaDisponibilidad($fecha_seleccionada, $tipo, $id)
+        //Parametros:
+        //fecha que ha elegido el usuario
+        //tipo de consulta que vamos a hacer
+        //id del registro actual
+        //tipo de fecha que vamos a evaluar
+        private function chequeaDisponibilidad($fecha_seleccionada, $tipo, $id, $tipo_fecha_seleccionada)
         {
             
             $valido = 0;
             $fecha_seleccionada_tstmp= strtotime($fecha_seleccionada);
+            
+            echo "hola";
             
             //No evaluamos tiempos pasados
             if($fecha_seleccionada_tstmp<time())
@@ -99,17 +106,25 @@ class PreventaController extends Controller
                
                 return $valido;
             }
+            //echo "select fecha_agendado as fecha, id from preventa where fecha_agendado is not null and fecha_agendado<>'0000-00-00 00:00:00' and substr(fecha_agendado,1,10)='".substr($fecha_seleccionada, 0, 10)."'"; exit;
             
-            
+            //Analizamos fechas según el tipo de consulta
             if($tipo=='fecha_agendado')
             {
-                $list= Yii::app()->db->createCommand("select fecha_agendado as fecha, id from preventa where fecha_agendado is not null and fecha_agendado<>'0000-00-00 00:00:00'")->queryAll();
+                $list= Yii::app()->db->createCommand("select fecha_agendado as fecha, id from preventa where fecha_agendado is not null and fecha_agendado<>'0000-00-00 00:00:00' and substr(fecha_agendado,1,10)='".substr($fecha_seleccionada, 0, 10)."'")->queryAll();
                 $intervalo = 3600;
             }else{
-                $list= Yii::app()->db->createCommand("select fecha_prueba as fecha, id from preventa where fecha_prueba is not null and fecha_prueba<>'0000-00-00 00:00:00'")->queryAll();
+                $list= Yii::app()->db->createCommand("select fecha_prueba as fecha, id from preventa where fecha_prueba is not null and fecha_prueba<>'0000-00-00 00:00:00' and substr(fecha_agendado,1,10)='".substr($fecha_seleccionada, 0, 10)."'")->queryAll();
                 $intervalo = 5400;
             }
             
+            if($tipo_fecha_seleccionada=='fecha_agendado')
+            {
+                $intervalo_fecha = 3600;
+            }else{
+                
+                $intervalo_fecha = 5400;
+            }
            
             foreach($list as $item)
             {
@@ -117,17 +132,35 @@ class PreventaController extends Controller
                 //$rs[]=$item['id'];
                 if($item['id'] != $id) //No evaluamos las fechas del propio registro
                 {
+                    
                     $timestamp_fecha_registro = strtotime($item["fecha"]);
                
+                    //echo "$fecha_seleccionada<>".$item['fecha']."---";
+                    //echo "$fecha_seleccionada_tstmp<>$timestamp_fecha_registro--#";
+                    
+                    //Si la fecha seleccionada es mayor, entonces respecto al evento anterior deberá haber
+                    //un intervalo de tiempo en función del tipo de evento anterior que haya
                     if($fecha_seleccionada_tstmp>$timestamp_fecha_registro)
                     {
+                        //echo "es mayor";
+                        //echo "$fecha_seleccionada_tstmp>$timestamp_fecha_registro";
+                        
                         if($fecha_seleccionada_tstmp-$timestamp_fecha_registro < $intervalo)
+                        {
                             $valido = 1;
+                        }
                     }
+                    
+                    //Si la fecha seleccionada es mayor entonces el evento posterior debe estar en un
+                    //intervalo de tiempo superior al del tipo de evento de la fecha seleccionada
                     if($fecha_seleccionada_tstmp<$timestamp_fecha_registro)
                     {
-                        if($timestamp_fecha_registro-$fecha_seleccionada_tstmp < $intervalo)
+                        echo "es menor";
+                        echo "$fecha_seleccionada_tstmp>$timestamp_fecha_registro";
+                        if($timestamp_fecha_registro-$fecha_seleccionada_tstmp < $intervalo_fecha)
+                        {
                             $valido = 1;
+                        }
                         
                     }
                     if($timestamp_fecha_registro==$fecha_seleccionada_tstmp)
@@ -146,7 +179,7 @@ class PreventaController extends Controller
                 
                 
             
-            
+           // exit;
            
             return $valido;
             
@@ -181,9 +214,9 @@ class PreventaController extends Controller
                 if(isset($_POST['preventa']['fecha_agendado']) &&  isset($_POST['preventa']['fecha_prueba']))
                 {
                     
-                    //echo $_POST['preventa']['fecha_agendado']."==".$_POST['preventa']['fecha_prueba']; exit;
+                    //echo $_POST['preventa']['fecha_agendado']."==".$_POST['preventa']['fecha_prueba']; //exit;
                     
-                     if($_POST['preventa']['fecha_agendado']==$_POST['preventa']['fecha_prueba'])
+                     if($_POST['preventa']['fecha_agendado']==$_POST['preventa']['fecha_prueba'] && !empty($_POST['preventa']['fecha_agendado']) && $_POST['preventa']['fecha_agendado']!=':00' && $_POST['preventa']['fecha_agendado']!='0000-00-00 00:00:00')
                      {
                          $resultado = 1;
                          $mensaje = "Fechas no pueden ser iguales";
@@ -191,23 +224,36 @@ class PreventaController extends Controller
                     
                 }
                 
+                //analizamos fecha agendado
                  if(isset($_POST['preventa']['fecha_agendado']) && $resultado==0)
                  {
+                     //echo "-0-";
                      if(!empty($_POST['preventa']['fecha_agendado']) && $_POST['preventa']['fecha_agendado']!='0000-00-00 00:00:00')
                      {
-                         $resultado = $this->chequeaDisponibilidad($_POST['preventa']['fecha_agendado'],"fecha_agendado",$model->id);
+                         //echo "-1-";
+                         $resultado = $this->chequeaDisponibilidad($_POST['preventa']['fecha_agendado'],"fecha_agendado",$model->id,"fecha_agendado");
                          
+                         if($resultado==0)
+                         {
+                             //echo "-2-";
+                             $resultado = $this->chequeaDisponibilidad($_POST['preventa']['fecha_agendado'],"fecha_prueba",$model->id,"fecha_agendado");
+                         }
+                             
                          if($resultado==1){
                              $mensaje = "Fecha agendado no valida ".$_POST['preventa']['fecha_agendado']; 
                          }
                      }
                  }
                  
+                 //Analizamos fecha prueba
                  if(isset($_POST['preventa']['fecha_prueba']) && $resultado==0)
                  {
                      if(!empty($_POST['preventa']['fecha_prueba']) && $_POST['preventa']['fecha_prueba']!='0000-00-00 00:00:00')
                      {
-                         $resultado = $this->chequeaDisponibilidad($_POST['preventa']['fecha_prueba'],"fecha_prueba",$model->id);
+                         $resultado = $this->chequeaDisponibilidad($_POST['preventa']['fecha_prueba'],"fecha_prueba",$model->id,"fecha_prueba");
+                         
+                         if($resultado==0)
+                             $resultado = $this->chequeaDisponibilidad($_POST['preventa']['fecha_prueba'],"fecha_agendado",$model->id,"fecha_prueba");
                          
                          if($resultado==1){
                              $mensaje = "Fecha prueba no valida ".$_POST['preventa']['fecha_prueba'];
@@ -215,7 +261,7 @@ class PreventaController extends Controller
                      }
                  }
                  
-                 
+                 //exit;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
