@@ -53,16 +53,26 @@ echo "<p>".CHtml::link('Descargar cuestionario','cuestionario.doc')."</p>";
 ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php 
+
+        //Cambiamos el orden
+        $dataProvider = $model->search();
+        $dataProvider->sort = array(
+            'defaultOrder'=>'id DESC'
+        );
+        //--------------
+
+        $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'preventa-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$dataProvider,//$model->search(),
+            
 	'filter'=>$model,
         'selectionChanged'=>'function(id){ location.href = "'.$this->createUrl($mi_controller).'/id/"+$.fn.yiiGridView.getSelection(id);}',
 	'columns'=>array(
 		//'id',
 		'vendedor',
-		'email_vendedor',
-		'telefono_vendedor',
+	//	'email_vendedor',
+	//	'telefono_vendedor',
                // 'gestor',
 	//	'email_gestor',
 	//	'telefono_gestor',

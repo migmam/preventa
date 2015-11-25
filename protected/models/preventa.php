@@ -119,6 +119,9 @@ class preventa extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+               // $criteria->'sort'=>array(
+                 // 'defaultOrder'=>'order ASC',
+                //),
 
 		$criteria->compare('id',$this->id,true);
 

@@ -78,7 +78,22 @@ class PreventaController extends Controller
 		{
 			$model->attributes=$_POST['preventa'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                        {
+                           $email_destino = Yii::app()->params['email_aviso_creacion'];
+                            
+                            //$cuerpo = str_replace('#estado#',$model->estado->estado,$cuerpo);
+                            //$cuerpo = str_replace('#preventa#',$_POST['preventa']['cliente'],$cuerpo);
+                            //$cuerpo = str_replace('#email#',$_POST['preventa']['email_cliente'],$cuerpo);
+                            //$cuerpo = str_replace('#telefono#',$_POST['preventa']['telefono_cliente'],$cuerpo);
+                            //$cuerpo = str_replace('#observaciones#',$_POST['preventa']['observaciones'],$cuerpo);
+                            $cuerpo = "Creada preventa";
+                                     
+                            if(!empty($email_destino))
+                            {
+                                Controller::mailsend($email_destino,"notreply@virtualcarecorp.com","Preventa app",$cuerpo);
+                            }
+                            $this->redirect(array('view','id'=>$model->id));
+                        }
 		}
 
 		$this->render('create',array(
