@@ -216,12 +216,14 @@ class PreventaController extends Controller
                 if(isset($_POST['preventa']['fecha_agendado']))
                 {
                     $_POST['preventa']['fecha_agendado'] = str_replace('/','-', $_POST['preventa']['fecha_agendado']);
-                    $_POST['preventa']['fecha_agendado'] = substr($_POST['preventa']['fecha_agendado'],0,16).":00";
+                    if(!empty($_POST['preventa']['fecha_agendado']))
+                        $_POST['preventa']['fecha_agendado'] = substr($_POST['preventa']['fecha_agendado'],0,16).":00";
                 }
                 if(isset($_POST['preventa']['fecha_prueba']))
                 {
                     $_POST['preventa']['fecha_prueba'] = str_replace('/','-', $_POST['preventa']['fecha_prueba']);
-                    $_POST['preventa']['fecha_prueba'] = substr($_POST['preventa']['fecha_prueba'],0,16).":00";
+                     if(!empty($_POST['preventa']['fecha_prueba']))
+                        $_POST['preventa']['fecha_prueba'] = substr($_POST['preventa']['fecha_prueba'],0,16).":00";
                 }
                 
                 

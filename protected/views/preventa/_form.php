@@ -262,7 +262,7 @@ global $permite_escribir;
        
        ?>
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Grabar'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
 	</div>
  <?php 
             $this->endWidget(); ?>
