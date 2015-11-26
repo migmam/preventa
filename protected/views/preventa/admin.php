@@ -42,7 +42,7 @@ if(Yii::app()->user->role=="axtel")
     echo "<p>".CHtml::link('Crear preventa',array('preventa/create'))."</p>";  
 }
 
-echo "<p>".CHtml::link('Fichero Conmutadores Calificados troncales SIP','conmutadores.pdf')."</p>";  
+echo "<p>".CHtml::link('Fichero Conmutadores Calificados troncales SIP','conmutadores.pdf',array('target'=>'conmutadores'))."</p>";  
 ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
