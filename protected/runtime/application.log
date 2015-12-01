@@ -8161,3 +8161,22 @@ Stack trace:
 REQUEST_URI=/preventa/index.php?r=preventa/admin
 HTTP_REFERER=http://localhost/preventa/index.php?r=preventa/update&id=10
 ---
+2015/12/01 16:38:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/html/preventa/protected/controllers/PreventaController.php:499
+Stack trace:
+#0 /var/www/html/preventa/protected/controllers/PreventaController.php(62): PreventaController->loadModel()
+#1 /home/miguel/yii/web/actions/CInlineAction.php(49): PreventaController->actionView()
+#2 /home/miguel/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /home/miguel/yii/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 /home/miguel/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /home/miguel/yii/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 /home/miguel/yii/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 /home/miguel/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 /home/miguel/yii/web/CController.php(291): CFilterChain->run()
+#9 /home/miguel/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/miguel/yii/web/CWebApplication.php(282): CController->run('view')
+#11 /home/miguel/yii/web/CWebApplication.php(141): CWebApplication->runController('preventa/view')
+#12 /home/miguel/yii/base/CApplication.php(184): CWebApplication->processRequest()
+#13 /var/www/html/preventa/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/preventa/index.php?r=preventa/view
+---

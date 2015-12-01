@@ -24,7 +24,17 @@
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="logo"><?php echo CHtml::image(Yii::app()->request->baseUrl."/images/vc.png"); echo CHtml::encode(Yii::app()->name); ?></div>
+		<div id="logo">
+                    <table border='0' style='margin-bottom: 0px' width='100%'>
+                        <tr>
+                            <td width='33%' align='left'><?php echo CHtml::image(Yii::app()->request->baseUrl."/images/Axtel.png");?></td>
+                            <td width='33%' style="text-align: center"><?php echo CHtml::encode(Yii::app()->name);?></td>
+                            <td width='33%' align='right'><?php echo CHtml::image(Yii::app()->request->baseUrl."/images/vc.png",'', array(
+    'align'=>"right",
+)); ?></td>
+                        </tr>
+                    </table>
+                </div>
 	</div><!-- header -->
 
 	<div id="mainmenu">
