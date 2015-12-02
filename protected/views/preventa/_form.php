@@ -68,25 +68,25 @@ global $permite_escribir;
 		<?php echo $form->error($model,'telefono_vendedor'); ?>
 	</div>
          <?php
-        if(Yii::app()->controller->action->id != "create")
+        if(Yii::app()->controller->action->id != "create" )
         {
-            
+                           
         ?>
         <div class="row">
 		<?php echo $form->labelEx($model,'gestor'); ?>
- 		<?php echo $form->textField($model,'gestor',array('size'=>60,'maxlength'=>60,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+ 		<?php echo $form->textField($model,'gestor',array('size'=>60,'maxlength'=>60,'readonly'=>0, 'style' =>'background-color: white;color: black')); ?>
 		<?php echo $form->error($model,'gestor'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'email_gestor'); ?>
- 		<?php echo $form->textField($model,'email_gestor',array('size'=>45,'maxlength'=>45,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+ 		<?php echo $form->textField($model,'email_gestor',array('size'=>45,'maxlength'=>45,'readonly'=>0, 'style' =>'background-color: white;color: black')); ?>
 		<?php echo $form->error($model,'email_gestor'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'telefono_gestor'); ?>
-		<?php echo $form->textField($model,'telefono_gestor',array('size'=>20,'maxlength'=>20,'readonly'=>$mi_lectura, 'style' =>$mi_style)); ?>
+		<?php echo $form->textField($model,'telefono_gestor',array('size'=>20,'maxlength'=>20,'readonly'=>0, 'style' =>'background-color: white;color: black')); ?>
 		<?php echo $form->error($model,'telefono_gestor'); ?>
 	</div>
          <?php
