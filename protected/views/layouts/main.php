@@ -27,7 +27,7 @@
 		<div id="logo">
                     <table border='0' style='margin-bottom: 0px' width='100%'>
                         <tr>
-                            <td width='33%' align='left'><?php echo CHtml::image(Yii::app()->request->baseUrl."/images/Axtel.png");?></td>
+                            <td width='33%' align='left'><?php echo CHtml::image(Yii::app()->request->baseUrl."/images/Axtel.png",'',array("width"=>"200px","height"=>"53px"));?></td>
                             <td width='33%' style="text-align: center"><?php echo CHtml::encode(Yii::app()->name);?></td>
                             <td width='33%' align='right'><?php echo CHtml::image(Yii::app()->request->baseUrl."/images/vc.png",'', array(
     'align'=>"right",

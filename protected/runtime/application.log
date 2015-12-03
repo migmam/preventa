@@ -8180,3 +8180,27 @@ Stack trace:
 #14 {main}
 REQUEST_URI=/preventa/index.php?r=preventa/view
 ---
+2015/12/03 10:19:21 [error] [php] Use of undefined constant height - assumed 'height' (/var/www/html/preventa/protected/views/layouts/main.php:30)
+Stack trace:
+#0 /home/miguel/yii/web/widgets/CContentDecorator.php(76): SiteController->renderFile()
+#1 /home/miguel/yii/web/widgets/CContentDecorator.php(54): CContentDecorator->decorate()
+#2 /home/miguel/yii/web/widgets/COutputProcessor.php(44): CContentDecorator->processOutput()
+#3 /home/miguel/yii/web/CBaseController.php(214): CContentDecorator->run()
+#4 /home/miguel/yii/web/CBaseController.php(308): SiteController->endWidget()
+#5 /var/www/html/preventa/protected/views/layouts/column1.php(6): SiteController->endContent()
+#6 /home/miguel/yii/web/CBaseController.php(126): require()
+#7 /home/miguel/yii/web/CBaseController.php(95): SiteController->renderInternal()
+#8 /home/miguel/yii/web/CController.php(784): SiteController->renderFile()
+#9 /var/www/html/preventa/protected/controllers/SiteController.php(32): SiteController->render()
+#10 /home/miguel/yii/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#11 /home/miguel/yii/web/CController.php(308): CInlineAction->runWithParams()
+#12 /home/miguel/yii/web/CController.php(286): SiteController->runAction()
+#13 /home/miguel/yii/web/CController.php(265): SiteController->runActionWithFilters()
+#14 /home/miguel/yii/web/CWebApplication.php(282): SiteController->run()
+#15 /home/miguel/yii/web/CWebApplication.php(141): CWebApplication->runController()
+#16 /home/miguel/yii/base/CApplication.php(184): CWebApplication->processRequest()
+#17 /var/www/html/preventa/index.php(13): CWebApplication->run()
+REQUEST_URI=/preventa/
+in /var/www/html/preventa/protected/views/layouts/main.php (30)
+in /var/www/html/preventa/protected/views/layouts/column1.php (6)
+in /var/www/html/preventa/protected/controllers/SiteController.php (32)
