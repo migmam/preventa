@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Preventas',"Historico"
+	'Preventas',"Histórico"
 );
 
 $this->menu=array(
@@ -9,7 +9,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Historico</h1>
+<h1>Histórico</h1>
 
 <!--h1>View preventa #<?php //echo $model->id; ?></h1-->
 

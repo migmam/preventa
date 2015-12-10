@@ -78,14 +78,14 @@ class preventa extends CActiveRecord
 			'id' => 'Id',
 			'vendedor' => 'Vendedor',
 			'email_vendedor' => 'Email Vendedor',
-			'telefono_vendedor' => 'Telefono Vendedor',
+			'telefono_vendedor' => 'Teléfono Vendedor',
 			'cliente' => 'Cliente',
-			'telefono_cliente' => 'Telefono Cliente',
+			'telefono_cliente' => 'Teléfono Cliente',
 			'email_cliente' => 'Email Cliente',
 			'id_estado' => 'Estado',
                         'id_oferta' => 'Oferta',
                         'id_complejidad' => 'Complejidad',
-                        'id_solucion' => 'Solucion',
+                        'id_solucion' => 'Solución',
                         'id_tipo' => 'Tipo',
 			'observaciones' => 'Observaciones',
 			'fecha_agendado' => 'Fecha Agendado',
@@ -95,7 +95,7 @@ class preventa extends CActiveRecord
                         'producto_existente'=>'Producto existente',
                         'gestor' => 'Gestor',
 			'email_gestor' => 'Email Gestor',
-			'telefono_gestor' => 'Telefono Gestor',
+			'telefono_gestor' => 'Teléfono Gestor',
                     	'codigo_contrato' => 'Nº Oportunidad'
                     
                     

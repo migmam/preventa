@@ -45,7 +45,7 @@ $this->menu=array(
                     'value'=>$model->estado->estado,
                 ),
                 array(
-                    'label'=>'Solucion',
+                    'label'=>'Solución',
                     'value'=>$model->solucion->solucion,
                 ),
                 array(

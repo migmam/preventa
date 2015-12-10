@@ -51,7 +51,7 @@ class soluciones extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'solucion' => 'Solucion',
+			'solucion' => 'Solución',
 		);
 	}
 
