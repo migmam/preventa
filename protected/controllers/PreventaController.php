@@ -41,7 +41,7 @@ class PreventaController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('delete'),
-				'users'=>array('admin'),
+				'users'=>array('admintroncal@somosvirtualcare.com'),
 			),
                         array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin'),
@@ -408,7 +408,7 @@ class PreventaController extends Controller
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(array('index'));
+				$this->redirect(array('admin'));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');

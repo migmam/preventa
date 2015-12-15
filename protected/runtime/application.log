@@ -8204,3 +8204,39 @@ REQUEST_URI=/preventa/
 in /var/www/html/preventa/protected/views/layouts/main.php (30)
 in /var/www/html/preventa/protected/views/layouts/column1.php (6)
 in /var/www/html/preventa/protected/controllers/SiteController.php (32)
+2015/12/15 12:34:22 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /home/miguel/yii/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /home/miguel/yii/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /home/miguel/yii/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /home/miguel/yii/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /home/miguel/yii/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /home/miguel/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /home/miguel/yii/web/CController.php(291): CFilterChain->run()
+#6 /home/miguel/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /home/miguel/yii/web/CWebApplication.php(282): CController->run('delete')
+#8 /home/miguel/yii/web/CWebApplication.php(141): CWebApplication->runController('preventa/delete')
+#9 /home/miguel/yii/base/CApplication.php(184): CWebApplication->processRequest()
+#10 /var/www/html/preventa/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/preventa/index.php?r=preventa/delete&id=10
+HTTP_REFERER=http://localhost/preventa/index.php?r=preventa/update/id/10
+---
+2015/12/15 12:40:34 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/html/preventa/protected/controllers/PreventaController.php:414
+Stack trace:
+#0 /home/miguel/yii/web/actions/CInlineAction.php(49): PreventaController->actionDelete()
+#1 /home/miguel/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /home/miguel/yii/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#3 /home/miguel/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#4 /home/miguel/yii/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 /home/miguel/yii/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 /home/miguel/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 /home/miguel/yii/web/CController.php(291): CFilterChain->run()
+#8 /home/miguel/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /home/miguel/yii/web/CWebApplication.php(282): CController->run('delete')
+#10 /home/miguel/yii/web/CWebApplication.php(141): CWebApplication->runController('preventa/delete')
+#11 /home/miguel/yii/base/CApplication.php(184): CWebApplication->processRequest()
+#12 /var/www/html/preventa/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/preventa/index.php?r=preventa/delete&id=7
+HTTP_REFERER=http://localhost/preventa/index.php?r=preventa/update/id/7
+---

@@ -16,10 +16,14 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	//array('label'=>'List preventa', 'url'=>array('index')),
 	//array('label'=>'Create preventa', 'url'=>array('create')),
-	//array('label'=>'View preventa', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Listar preventas', 'url'=>array('admin')),
         array('label'=>'Ver histórico', 'url'=>array('preventahistorico', 'id'=>$model->id)),
 );
+
+if(Yii::app()->user->role == 'admin')
+{
+    array_push($this->menu, array('label'=>'Eliminar preventa', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>Yii::t('zii','Seguro que quieres borrar esta preventa?'))));
+}
 ?>
 
 <h1>Ficha preventa</h1>

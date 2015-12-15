@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 //	array('label'=>'List preventa', 'url'=>array('index')),
-	array('label'=>'Create preventa', 'url'=>array('create')),
+	array('label'=>'Crear preventa', 'url'=>array('create')),
 //        array('label'=>'Entrar', 'url'=>array('view','id'=>'2')),
 );
 
